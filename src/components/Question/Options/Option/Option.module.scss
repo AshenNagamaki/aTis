@@ -1,0 +1,23 @@
+@import "../../../../assets/utilities.scss";
+
+.Option {
+  width: 55rem;
+  height: 2rem;
+  margin: 0;
+  padding: 2rem;
+  border-radius: 2rem;
+  font-size: 100%;
+  color: $general-text-color;
+  cursor: pointer;
+  transition: background-color 0.25s ease-in-out, transform 0.25s;
+  &::first-letter {
+    margin-right: 0.5rem;
+    font-size: 125%;
+    font-weight: 700;
+  }
+  &:hover {
+    background-color: $main-color;
+    color: $general-background-color;
+    transform: translate(1rem, 1rem);
+  }
+}

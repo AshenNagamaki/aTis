@@ -1,0 +1,18 @@
+@import "../../assets/utilities.scss";
+
+.Question {
+  width: 85rem;
+  margin: 3.5rem 7rem;
+  padding: 5rem;
+  border-radius: 0.5rem;
+  background-color: $general-background-color;
+  .QuestionText {
+    margin: 0 0 2.5rem 2rem;
+    font-size: 110%;
+  }
+  .AnswerTitle {
+    margin: 0 0 1rem 2rem;
+    font-size: 150%;
+    opacity: 0.5;
+  }
+}
