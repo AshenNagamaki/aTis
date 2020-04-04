@@ -1,4 +1,10 @@
-@import "../../../../assets/utilities.scss";
+@import "../../../../utilities/utilities.scss";
+
+@mixin hover-active {
+  background-color: $main-color;
+  color: $general-background-color;
+  transform: translate(1rem, 1rem);
+}
 
 .Option {
   width: 55rem;
@@ -10,14 +16,15 @@
   color: $general-text-color;
   cursor: pointer;
   transition: background-color 0.25s ease-in-out, transform 0.25s;
+  &.Active {
+    @include hover-active;
+  }
   &::first-letter {
     margin-right: 0.5rem;
     font-size: 125%;
     font-weight: 700;
   }
   &:hover {
-    background-color: $main-color;
-    color: $general-background-color;
-    transform: translate(1rem, 1rem);
+    @include hover-active;
   }
 }

@@ -4,9 +4,16 @@ import { Option } from "./Option/Option";
 
 import classes from "./Options.module.scss";
 
-export const Options = ({ options }) => {
-  const optionsData = options.map((option, index) => (
-    <Option key={index} oNum={index} option={option} />
+export const Options = props => {
+  const optionsData = props.options.map((option, index) => (
+    <Option
+      key={index}
+      qNum={props.qNum}
+      oNum={index}
+      option={option}
+      answersState={props.answersState}
+      onAddAnswer={props.onAddAnswer}
+    />
   ));
   return <ol className={classes.Options}>{optionsData}</ol>;
 };
