@@ -1,0 +1,72 @@
+@import "../../utilities/utilities.scss";
+
+$arrow-size: 2rem;
+
+.QuestionsWrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  .Questions {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .SubmitButton {
+    width: 45rem;
+    height: 5.5rem;
+    margin: 1rem 0;
+    padding: 0;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: $general-background-color;
+    box-shadow: $general-box-shadow;
+    font-size: 110%;
+    color: $general-text-color;
+    cursor: pointer;
+    transition: 0.25s ease-in-out;
+    &:hover:enabled {
+      width: 30rem;
+      border-radius: 5rem;
+      background-color: $general-background-color;
+      font-size: 115%;
+      color: $main-color;
+    }
+    &[disabled],
+    &:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+  }
+  .QuestionsReturn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: inherit;
+    text-decoration: underline;
+    color: $general-background-color;
+    opacity: 0.75;
+    cursor: pointer;
+  }
+  .BackToTopWrapper {
+    position: sticky;
+    bottom: 5%;
+    right: 5%;
+    align-self: flex-end;
+    margin: 0;
+    padding: 1.5rem;
+    .BackToTopArrow {
+      @include arrow($arrow-size, -135deg);
+    }
+  }
+  .ReturnWrapper {
+    position: absolute;
+    top: 2.5%;
+    left: 1%;
+    align-self: flex-start;
+    margin: 0;
+    padding: 1.5rem;
+    .ReturnArrow {
+      @include arrow($arrow-size, 135deg);
+    }
+  }
+}

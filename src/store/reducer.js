@@ -1,10 +1,5 @@
+import { initialState } from "./initialState";
 import * as actionTypes from "./actionTypes";
-
-const initialState = {
-  questions: [],
-  options: [],
-  answers: []
-};
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
