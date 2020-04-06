@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { Question } from "../../components/Question/Question";
 import { addAnswerCreator } from "../../store/actionCreators";
 
-import classes from "./Questions.module.scss";
+import classes from "./QuestionsTablet.module.scss";
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -22,12 +26,31 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export const Questions = connect(
+export const QuestionsTablet = connect(
   mapStateToProps,
   mapDispatchToProps
 )((props) => {
-  const isOnSubmit = !(
-    props.answ.filter((answ) => answ).length === props.que.length
+  const [isScrollVisible, setIsScrollVisible] = useState(false);
+  useEffect(() => {
+    document.addEventListener("scroll", toggleScrollVisibility);
+    return () => window.removeEventListener("scroll", toggleScrollVisibility);
+  }, []);
+  const toggleScrollVisibility = () => {
+    window.pageYOffset > 325
+      ? setIsScrollVisible(true)
+      : setIsScrollVisible(false);
+  };
+  const isOnSubmit =
+    JSON.parse(JSON.stringify(props.answ)).filter((el) => el).length ===
+    props.que.length;
+  const scrollToTopButton = (
+    <div className={classes.BackToTopWrapper}>
+      <span
+        className={classes.BackToTopArrow}
+        title="Back to top"
+        onClick={scrollToTop}
+      ></span>
+    </div>
   );
   const questionsData = props.que.map((question, index) => (
     <Question
@@ -42,17 +65,23 @@ export const Questions = connect(
   return (
     <section className={classes.QuestionsWrapper}>
       <div className={classes.ReturnWrapper}>
-        <div className={classes.ReturnArrow}></div>
+        <span
+          className={classes.ReturnArrow}
+          title="Return to the initial window"
+        ></span>
       </div>
       <ul className={classes.Questions}>{questionsData}</ul>
+
       <button
         className={classes.SubmitButton}
         type="button"
         name="Answers submit button"
         value="Submit answers"
-        disabled={isOnSubmit}
+        disabled={!isOnSubmit}
       >
-        Submit answers
+        {isOnSubmit
+          ? "Submit answers"
+          : "Please, answer all the questions to proceed"}
       </button>
       <button
         className={classes.QuestionsReturn}
@@ -62,9 +91,7 @@ export const Questions = connect(
       >
         OR return to the initial window
       </button>
-      <div className={classes.BackToTopWrapper}>
-        <div className={classes.BackToTopArrow}></div>
-      </div>
+      {isScrollVisible && scrollToTopButton}
     </section>
   );
 });
