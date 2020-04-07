@@ -1,9 +1,8 @@
 @import "../../../../utilities/utilities.scss";
 
-@mixin hover-active {
+@mixin color-change-animation {
   background-color: $main-color;
   color: $general-background-color;
-  transform: translate(1rem, 1rem);
 }
 
 .Option {
@@ -17,7 +16,8 @@
   cursor: pointer;
   transition: background-color 0.25s ease-in-out, transform 0.25s;
   &.Active {
-    @include hover-active;
+    transform: translate(1rem, 1rem);
+    @include color-change-animation;
   }
   &::first-letter {
     margin-right: 0.5rem;
@@ -25,6 +25,6 @@
     font-weight: 700;
   }
   &:hover {
-    @include hover-active;
+    @include color-change-animation;
   }
 }
