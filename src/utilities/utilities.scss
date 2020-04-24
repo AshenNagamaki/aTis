@@ -38,6 +38,6 @@ $general-box-shadow: 0 0.28rem 0.22rem rgba(0, 0, 0, 0.034),
     @include rotate($arrowDeg);
   }
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 }

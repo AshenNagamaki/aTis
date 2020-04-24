@@ -12,6 +12,7 @@ const scrollToTop = () => {
 
 const mapStateToProps = (state) => {
   return {
+    title: state.title,
     que: state.questions,
     opt: state.options,
     answ: state.answers,
@@ -64,6 +65,7 @@ export const QuestionsTablet = connect(
   ));
   return (
     <section className={classes.QuestionsWrapper}>
+      <h1 className={classes.Title}>{props.title}</h1>
       <div className={classes.ReturnWrapper}>
         <span
           className={classes.ReturnArrow}
@@ -71,7 +73,6 @@ export const QuestionsTablet = connect(
         ></span>
       </div>
       <ul className={classes.Questions}>{questionsData}</ul>
-
       <button
         className={classes.SubmitButton}
         type="button"
@@ -81,7 +82,7 @@ export const QuestionsTablet = connect(
       >
         {isOnSubmit
           ? "Submit answers"
-          : "Please, answer all the questions to proceed"}
+          : "Please answer all the questions to proceed"}
       </button>
       <button
         className={classes.QuestionsReturn}
