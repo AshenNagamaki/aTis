@@ -1,6 +1,8 @@
 export const initialState = {
-  title: "",
+  title: '',
   questions: [],
   options: [],
   answers: [],
+  isLoading: false,
+  reqResponse: null,
 };

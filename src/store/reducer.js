@@ -1,5 +1,5 @@
-import { initialState } from "./initialState";
-import * as actionTypes from "./actionTypes";
+import { initialState } from './initialState';
+import * as actionTypes from './actionTypes';
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -9,6 +9,23 @@ export const reducer = (state = initialState, action) => {
         updatedAnswers[action.questionNumber] = action.optionNumber;
         return { ...state, answers: updatedAnswers };
       }
+
+    case actionTypes.POST_ANSWER_INITIALIZER:
+      return { ...state, isLoading: true };
+
+    case actionTypes.POST_ANSWER_SUCCESS:
+      return {
+        title: '',
+        questions: [],
+        options: [],
+        answers: [],
+        isLoading: false,
+        reqResponse: action.payload,
+      };
+
+    case actionTypes.POST_ANSWER_FAILURE:
+      return { ...state, isLoading: false, reqResponse: action.payload.error };
+    default:
+      return state;
   }
-  return state;
 };

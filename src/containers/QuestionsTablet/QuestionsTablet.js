@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
-import { Question } from "../../components/Question/Question";
-import { addAnswerCreator } from "../../store/actionCreators";
+import { Question } from '../../components/Question/Question';
+import {
+  addAnswerCreator,
+  postAnswerCreator,
+} from '../../store/actionCreators';
 
-import classes from "./QuestionsTablet.module.scss";
+import classes from './QuestionsTablet.module.scss';
 
 const scrollToTop = () => {
-  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 };
 
 const mapStateToProps = (state) => {
@@ -21,9 +24,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddAnswer: (qNum, oNum) => {
-      dispatch(addAnswerCreator(qNum, oNum));
-    },
+    onAddAnswer: (qNum, oNum) => dispatch(addAnswerCreator(qNum, oNum)),
+    onPostAnswerCreator: (answ) => dispatch(postAnswerCreator(answ)),
   };
 };
 
@@ -33,8 +35,8 @@ export const QuestionsTablet = connect(
 )((props) => {
   const [isScrollVisible, setIsScrollVisible] = useState(false);
   useEffect(() => {
-    document.addEventListener("scroll", toggleScrollVisibility);
-    return () => window.removeEventListener("scroll", toggleScrollVisibility);
+    document.addEventListener('scroll', toggleScrollVisibility);
+    return () => window.removeEventListener('scroll', toggleScrollVisibility);
   }, []);
   const toggleScrollVisibility = () => {
     window.pageYOffset > 325
@@ -79,10 +81,11 @@ export const QuestionsTablet = connect(
         name="Answers submit button"
         value="Submit answers"
         disabled={!isOnSubmit}
+        onClick={() => props.onPostAnswerCreator(props.answ)}
       >
         {isOnSubmit
-          ? "Submit answers"
-          : "Please answer all the questions to proceed"}
+          ? 'Submit answers'
+          : 'Please answer all the questions to proceed'}
       </button>
       <button
         className={classes.QuestionsReturn}
