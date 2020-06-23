@@ -9,6 +9,7 @@ export const reducer = (state = initialState, action) => {
         updatedAnswers[action.questionNumber] = action.optionNumber;
         return { ...state, answers: updatedAnswers };
       }
+      return state;
 
     case actionTypes.POST_ANSWER_INITIALIZER:
       return { ...state, isLoading: true };
