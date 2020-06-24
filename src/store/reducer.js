@@ -25,7 +25,16 @@ export const reducer = (state = initialState, action) => {
       };
 
     case actionTypes.POST_ANSWER_FAILURE:
-      return { ...state, isLoading: false, reqResponse: action.payload.error };
+      return {
+        ...state,
+        isLoading: false,
+        reqResponse: JSON.parse(
+          JSON.stringify(
+            action.payload.error,
+            Object.getOwnPropertyNames(action.payload.error)
+          )
+        ),
+      };
     default:
       return state;
   }

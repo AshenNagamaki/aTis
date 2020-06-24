@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import { axiosConfig as axios } from '../utilities/axios-utilities';
 
 export const addAnswerCreator = (qNum, oNum) => {
   return {
@@ -25,24 +26,14 @@ export const postAnswerFailure = (error) => ({
 export const postAnswerCreator = (answerData) => {
   return async (dispatch) => {
     dispatch(postAnswerInitializer());
-
-    const config = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(answerData),
-    };
-
     try {
-      const requestResponse = await fetch(
-        'https://private-online-testing-service.firebaseio.com/testAnswers.json',
-        config
+      const reqResponse = await axios.post(
+        '/answers.json',
+        JSON.stringify(answerData)
       );
-      const responseJSON = await requestResponse.json();
-      dispatch(postAnswerSuccess(responseJSON));
-    } catch (error) {
-      dispatch(postAnswerFailure(error));
+      dispatch(postAnswerSuccess(reqResponse));
+    } catch (reqError) {
+      dispatch(postAnswerFailure(reqError));
     }
   };
 };
