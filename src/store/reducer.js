@@ -17,6 +17,7 @@ export const reducer = (state = initialState, action) => {
     case actionTypes.POST_ANSWER_SUCCESS:
       return {
         title: '',
+        author: '',
         questions: [],
         options: [],
         answers: [],

@@ -10,6 +10,7 @@ import classes from './QuestionsTablet.module.scss';
 const mapStateToProps = (state) => {
   return {
     title: state.title,
+    author: state.author,
     que: state.questions,
     opt: state.options,
     answ: state.answers,
@@ -71,6 +72,7 @@ export const QuestionsTablet = connect(
   return (
     <section className={classes.QuestionsWrapper}>
       <h1 className={classes.Title}>{props.title}</h1>
+      <h3 className={classes.Author}>{props.author && `by ${props.author}`}</h3>
       <div className={classes.ReturnWrapper}>
         <span
           className={classes.ReturnArrow}

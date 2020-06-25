@@ -14,8 +14,15 @@ $arrow-size: 1.5rem;
   .Title {
     margin: 2.5rem 0 0;
     padding: 0;
-    font-size: 165%;
+    font-size: 195%;
     color: $general-background-color;
+  }
+  .Author {
+    margin: 1.5rem 0 0;
+    padding: 0;
+    font-size: 125%;
+    color: $general-background-color;
+    opacity: 0.55;
   }
   .SubmitButton {
     width: 40rem;
