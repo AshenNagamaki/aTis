@@ -5,25 +5,14 @@ import { Options } from './Options/Options';
 
 import classes from './Question.module.scss';
 
-export const Question = ({
-  qNum,
-  question,
-  options,
-  answersState,
-  onAddAnswer,
-}) => (
+export const Question = ({ qNum, question, options }) => (
   <li className={classes.Question}>
     <p className={classes.QuestionText}>
       {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
       {qNum + 1}. {question}
     </p>
     <p className={classes.AnswerTitle}>Answer</p>
-    <Options
-      qNum={qNum}
-      options={options}
-      answersState={answersState}
-      onAddAnswer={onAddAnswer}
-    />
+    <Options qNum={qNum} options={options} />
   </li>
 );
 
@@ -34,6 +23,4 @@ Question.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ).isRequired,
-  answersState: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onAddAnswer: PropTypes.func.isRequired,
 };

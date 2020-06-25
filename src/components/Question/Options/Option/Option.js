@@ -1,14 +1,31 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { addAnswerCreator } from '../../../../store/actionCreators';
 import { handleKeyDown } from '../../../../utilities/utilities';
 
 import classes from './Option.module.scss';
 
-export const Option = ({ qNum, oNum, option, answersState, onAddAnswer }) => {
-  const literalOpt = String.fromCharCode(65 + oNum);
+const mapStateToProps = (state) => {
+  return {
+    answersState: state.answers,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddAnswer: (qNum, oNum) => dispatch(addAnswerCreator(qNum, oNum)),
+  };
+};
+
+export const Option = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)((props) => {
+  const literalOpt = String.fromCharCode(65 + props.oNum);
   const activeClasses =
-    answersState[qNum] === literalOpt
+    props.answersState[props.qNum] === literalOpt
       ? `${classes.Option} ${classes.Active}`
       : classes.Option;
   return (
@@ -16,19 +33,17 @@ export const Option = ({ qNum, oNum, option, answersState, onAddAnswer }) => {
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
       role="button"
       className={activeClasses}
-      onClick={() => onAddAnswer(qNum, literalOpt)}
+      onClick={() => props.onAddAnswer(props.qNum, literalOpt)}
       onKeyDown={handleKeyDown}
     >
       {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-      {literalOpt} {option}
+      {literalOpt} {props.option}
     </li>
   );
-};
+});
 
 Option.propTypes = {
   qNum: PropTypes.number.isRequired,
   oNum: PropTypes.number.isRequired,
   option: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  answersState: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onAddAnswer: PropTypes.func.isRequired,
 };

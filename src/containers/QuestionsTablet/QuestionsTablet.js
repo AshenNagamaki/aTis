@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { Question } from '../../components/Question/Question';
-import {
-  addAnswerCreator,
-  postAnswerCreator,
-} from '../../store/actionCreators';
+import { postAnswerCreator } from '../../store/actionCreators';
 import { scrollToTop, handleKeyDown } from '../../utilities/utilities';
 
 import classes from './QuestionsTablet.module.scss';
@@ -21,7 +18,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddAnswer: (qNum, oNum) => dispatch(addAnswerCreator(qNum, oNum)),
     onPostAnswerCreator: (answ) => dispatch(postAnswerCreator(answ)),
   };
 };
@@ -68,10 +64,9 @@ export const QuestionsTablet = connect(
       qNum={index}
       question={question}
       options={props.opt[index]}
-      answersState={props.answ}
-      onAddAnswer={props.onAddAnswer}
     />
   ));
+
   return (
     <section className={classes.QuestionsWrapper}>
       <h1 className={classes.Title}>{props.title}</h1>
