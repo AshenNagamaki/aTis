@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import { axiosConfig as axios } from '../utilities/axios-utilities';
+import { axiosInstance as axios } from '../utilities/axios-utilities';
 
 export const addAnswerCreator = (qNum, oNum) => {
   return {

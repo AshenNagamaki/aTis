@@ -1,19 +1,34 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import classes from "./Option.module.scss";
+import { handleKeyDown } from '../../../../utilities/utilities';
 
-export const Option = props => {
-  const literalOpt = String.fromCharCode(65 + props.oNum);
+import classes from './Option.module.scss';
+
+export const Option = ({ qNum, oNum, option, answersState, onAddAnswer }) => {
+  const literalOpt = String.fromCharCode(65 + oNum);
   const activeClasses =
-    props.answersState[props.qNum] === literalOpt
+    answersState[qNum] === literalOpt
       ? `${classes.Option} ${classes.Active}`
       : classes.Option;
   return (
     <li
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+      role="button"
       className={activeClasses}
-      onClick={() => props.onAddAnswer(props.qNum, literalOpt)}
+      onClick={() => onAddAnswer(qNum, literalOpt)}
+      onKeyDown={handleKeyDown}
     >
-      {literalOpt} {props.option}
+      {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+      {literalOpt} {option}
     </li>
   );
+};
+
+Option.propTypes = {
+  qNum: PropTypes.number.isRequired,
+  oNum: PropTypes.number.isRequired,
+  option: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  answersState: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onAddAnswer: PropTypes.func.isRequired,
 };

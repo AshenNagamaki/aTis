@@ -6,12 +6,9 @@ import {
   addAnswerCreator,
   postAnswerCreator,
 } from '../../store/actionCreators';
+import { scrollToTop, handleKeyDown } from '../../utilities/utilities';
 
 import classes from './QuestionsTablet.module.scss';
-
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-};
 
 const mapStateToProps = (state) => {
   return {
@@ -34,30 +31,40 @@ export const QuestionsTablet = connect(
   mapDispatchToProps
 )((props) => {
   const [isScrollVisible, setIsScrollVisible] = useState(false);
-  useEffect(() => {
-    document.addEventListener('scroll', toggleScrollVisibility);
-    return () => window.removeEventListener('scroll', toggleScrollVisibility);
-  }, []);
+
   const toggleScrollVisibility = () => {
+    // eslint-disable-next-line no-unused-expressions
     window.pageYOffset > 325
       ? setIsScrollVisible(true)
       : setIsScrollVisible(false);
   };
+
+  useEffect(() => {
+    document.addEventListener('scroll', toggleScrollVisibility);
+    return () => window.removeEventListener('scroll', toggleScrollVisibility);
+  }, []);
+
   const isOnSubmit =
     JSON.parse(JSON.stringify(props.answ)).filter((el) => el).length ===
     props.que.length;
+
   const scrollToTopButton = (
     <div className={classes.BackToTopWrapper}>
+      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
       <span
+        role="button"
+        tabIndex={0}
         className={classes.BackToTopArrow}
         title="Back to top"
         onClick={scrollToTop}
-      ></span>
+        onKeyDown={handleKeyDown}
+      />
     </div>
   );
+
   const questionsData = props.que.map((question, index) => (
     <Question
-      key={index}
+      key={`${question}`}
       qNum={index}
       question={question}
       options={props.opt[index]}
@@ -72,7 +79,7 @@ export const QuestionsTablet = connect(
         <span
           className={classes.ReturnArrow}
           title="Return to the initial window"
-        ></span>
+        />
       </div>
       <ul className={classes.Questions}>{questionsData}</ul>
       <button

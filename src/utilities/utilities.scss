@@ -33,7 +33,7 @@ $general-box-shadow: 0 0.28rem 0.22rem rgba(0, 0, 0, 0.034),
     border-right-style: solid;
     border-bottom-style: solid;
     border-color: $arrowColor;
-    content: "";
+    content: '';
     cursor: pointer;
     @include rotate($arrowDeg);
   }
