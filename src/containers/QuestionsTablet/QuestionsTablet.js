@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
     que: state.questions,
     opt: state.options,
     answ: state.answers,
+    isLoading: state.isLoading,
   };
 };
 
@@ -82,7 +83,7 @@ export const QuestionsTablet = connect(
         type="button"
         name="Answers submit button"
         value="Submit answers"
-        disabled={!isOnSubmit}
+        disabled={!isOnSubmit || props.isLoading}
         onClick={() => props.onPostAnswerCreator(props.answ)}
       >
         {isOnSubmit
