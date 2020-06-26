@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { Question } from '../../components/Question/Question';
+import { Loader } from '../../components/Loader/Loader';
 import { postAnswerCreator } from '../../store/actionCreators';
 import { scrollToTop, handleKeyDown } from '../../utilities/utilities';
 
@@ -40,11 +41,12 @@ export const QuestionsTablet = connect(
   useEffect(() => {
     document.addEventListener('scroll', toggleScrollVisibility);
     return () => window.removeEventListener('scroll', toggleScrollVisibility);
-  }, []);
+  });
 
   const isOnSubmit =
+    props.que.length &&
     JSON.parse(JSON.stringify(props.answ)).filter((el) => el).length ===
-    props.que.length;
+      props.que.length;
 
   const scrollToTopButton = (
     <div className={classes.BackToTopWrapper}>
@@ -69,17 +71,8 @@ export const QuestionsTablet = connect(
     />
   ));
 
-  return (
-    <section className={classes.QuestionsWrapper}>
-      <h1 className={classes.Title}>{props.title}</h1>
-      <h3 className={classes.Author}>{props.author && `by ${props.author}`}</h3>
-      <div className={classes.ReturnWrapper}>
-        <span
-          className={classes.ReturnArrow}
-          title="Return to the initial window"
-        />
-      </div>
-      <ul className={classes.Questions}>{questionsData}</ul>
+  const submitInterface = (
+    <>
       <button
         className={classes.SubmitButton}
         type="button"
@@ -100,6 +93,21 @@ export const QuestionsTablet = connect(
       >
         OR return to the initial window
       </button>
+    </>
+  );
+
+  return (
+    <section className={classes.QuestionsWrapper}>
+      <h1 className={classes.Title}>{props.title}</h1>
+      <h3 className={classes.Author}>{props.author && `by ${props.author}`}</h3>
+      <div className={classes.ReturnWrapper}>
+        <span
+          className={classes.ReturnArrow}
+          title="Return to the initial window"
+        />
+      </div>
+      <ul className={classes.Questions}>{questionsData}</ul>
+      {props.isLoading ? <Loader /> : submitInterface}
       {isScrollVisible && scrollToTopButton}
     </section>
   );
