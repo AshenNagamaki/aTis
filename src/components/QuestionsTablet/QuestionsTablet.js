@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { Question } from '../../components/Question/Question';
-import { Loader } from '../../components/Loader/Loader';
+import { Question } from '../Question/Question';
+import { Loader } from '../Loader/Loader';
 import { postAnswerCreator } from '../../store/actionCreators';
 import { scrollToTop, handleKeyDown } from '../../utilities/utilities';
 

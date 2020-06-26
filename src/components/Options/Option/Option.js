@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { addAnswerCreator } from '../../../../store/actionCreators';
-import { handleKeyDown } from '../../../../utilities/utilities';
+import { addAnswerCreator } from '../../../store/actionCreators';
+import { handleKeyDown } from '../../../utilities/utilities';
 
 import classes from './Option.module.scss';
 

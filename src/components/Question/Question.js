@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Options } from './Options/Options';
+import { Options } from '../Options/Options';
 
 import classes from './Question.module.scss';
 
