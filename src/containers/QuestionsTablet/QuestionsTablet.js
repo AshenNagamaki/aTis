@@ -48,6 +48,15 @@ export const QuestionsTablet = connect(
     JSON.parse(JSON.stringify(props.answ)).filter((el) => el).length ===
       props.que.length;
 
+  const returnButton = (
+    <div className={classes.ReturnWrapper}>
+      <span
+        className={classes.ReturnArrow}
+        title="Return to the initial window"
+      />
+    </div>
+  );
+
   const scrollToTopButton = (
     <div className={classes.BackToTopWrapper}>
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
@@ -86,6 +95,7 @@ export const QuestionsTablet = connect(
           : 'Please answer all the questions to proceed'}
       </button>
       <button
+        visibility="hidden"
         className={classes.QuestionsReturn}
         type="button"
         name="Return button"
@@ -100,12 +110,7 @@ export const QuestionsTablet = connect(
     <section className={classes.QuestionsWrapper}>
       <h1 className={classes.Title}>{props.title}</h1>
       <h3 className={classes.Author}>{props.author && `by ${props.author}`}</h3>
-      <div className={classes.ReturnWrapper}>
-        <span
-          className={classes.ReturnArrow}
-          title="Return to the initial window"
-        />
-      </div>
+      {!props.isLoading && returnButton}
       <ul className={classes.Questions}>{questionsData}</ul>
       {props.isLoading ? <Loader /> : submitInterface}
       {isScrollVisible && scrollToTopButton}

@@ -10,6 +10,7 @@ import classes from './Option.module.scss';
 const mapStateToProps = (state) => {
   return {
     answersState: state.answers,
+    isLoading: state.isLoading,
   };
 };
 
@@ -33,7 +34,10 @@ export const Option = connect(
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
       role="button"
       className={activeClasses}
-      onClick={() => props.onAddAnswer(props.qNum, literalOpt)}
+      onClick={() => {
+        // eslint-disable-next-line no-unused-expressions
+        !props.isLoading && props.onAddAnswer(props.qNum, literalOpt);
+      }}
       onKeyDown={handleKeyDown}
     >
       {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
