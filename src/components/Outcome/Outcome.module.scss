@@ -9,24 +9,31 @@
   width: 100%;
   height: 100%;
   color: $general-background-color;
-  .ErrorImage {
+  .Image {
     margin: 0;
     padding: 0;
     width: 65rem;
     max-width: 100%;
     height: auto;
-    opacity: 0.75;
-    filter: grayscale(100%);
+    &.OnFailure {
+      opacity: 0.75;
+      filter: grayscale(100%);
+    }
   }
   .Title {
-    margin: 2.75rem 0 0.5rem;
+    margin: 2.75rem 0 0;
     padding: 0;
-    font-size: 235%;
+    font-size: 275%;
+  }
+  .Topic {
+    margin: 4.75rem 0 0;
+    padding: 0;
+    font-size: 175%;
   }
   .Text {
-    margin: 1.25rem 0 9.5rem;
+    margin: 1.25rem 0 6.75rem;
     padding: 0;
-    font-size: 135%;
+    font-size: 120%;
     opacity: 0.65;
   }
 }
