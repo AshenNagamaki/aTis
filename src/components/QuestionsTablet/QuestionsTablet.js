@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { Question } from '../Question/Question';
-import { Loader } from '../Loader/Loader';
+import { Button } from '../UI/Button/Button';
+import { Loader } from '../UI/Loader/Loader';
 import { postAnswerCreator } from '../../store/actionCreators';
 import { scrollToTop, handleKeyDown } from '../../utilities/utilities';
 
@@ -41,7 +42,7 @@ export const QuestionsTablet = connect(
   useEffect(() => {
     document.addEventListener('scroll', toggleScrollVisibility);
     return () => window.removeEventListener('scroll', toggleScrollVisibility);
-  });
+  }, []);
 
   const isOnSubmit =
     props.que.length &&
@@ -82,18 +83,16 @@ export const QuestionsTablet = connect(
 
   const submitInterface = (
     <>
-      <button
-        className={classes.SubmitButton}
-        type="button"
-        name="Answers submit button"
-        value="Submit answers"
-        disabled={!isOnSubmit || props.isLoading}
-        onClick={() => props.onPostAnswerCreator(props.answ)}
+      <Button
+        bName="Answers submit button"
+        bValue="Submit answers"
+        isDisabled={!isOnSubmit || props.isLoading}
+        clickHandler={() => props.onPostAnswerCreator(props.answ)}
       >
         {isOnSubmit
           ? 'Submit answers'
           : 'Please answer all the questions to proceed'}
-      </button>
+      </Button>
       <button
         visibility="hidden"
         className={classes.QuestionsReturn}
@@ -106,7 +105,7 @@ export const QuestionsTablet = connect(
     </>
   );
 
-  return (
+  const questionsTablet = (
     <section className={classes.QuestionsWrapper}>
       <h1 className={classes.Title}>{props.title}</h1>
       <h3 className={classes.Author}>{props.author && `by ${props.author}`}</h3>
@@ -116,4 +115,6 @@ export const QuestionsTablet = connect(
       {isScrollVisible && scrollToTopButton}
     </section>
   );
+
+  return questionsTablet;
 });

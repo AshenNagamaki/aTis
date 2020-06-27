@@ -29,25 +29,4 @@
     font-size: 135%;
     opacity: 0.65;
   }
-  .ReturnButton {
-    width: 40rem;
-    height: 5.5rem;
-    margin: 1rem 0;
-    padding: 0;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: $general-background-color;
-    box-shadow: $general-box-shadow;
-    font-size: 110%;
-    color: $general-text-color;
-    cursor: pointer;
-    transition: 0.25s ease-in-out;
-    &:hover {
-      width: 30rem;
-      border-radius: 5rem;
-      background-color: $general-background-color;
-      font-size: 115%;
-      color: $main-color;
-    }
-  }
 }

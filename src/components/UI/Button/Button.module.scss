@@ -1,0 +1,28 @@
+@import '../../../utilities/utilities.scss';
+
+.Button {
+  width: 40rem;
+  height: 5.5rem;
+  margin: 1rem 0;
+  padding: 0;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: $general-background-color;
+  box-shadow: $general-box-shadow;
+  font-size: 110%;
+  color: $general-text-color;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+  &:hover:enabled {
+    width: 30rem;
+    border-radius: 5rem;
+    background-color: $general-background-color;
+    font-size: 115%;
+    color: $main-color;
+  }
+  &[disabled],
+  &:disabled {
+    opacity: 0.25;
+    cursor: default;
+  }
+}

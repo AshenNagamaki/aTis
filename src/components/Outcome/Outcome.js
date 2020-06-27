@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Button } from '../UI/Button/Button';
+
 import classes from './Outcome.module.scss';
 import errorImage from '../../assets/images/errorImage.png';
 
@@ -16,14 +18,9 @@ const Outcome = () => (
     <h2 className={classes.Text}>
       We had some issues submitting your answers. Please try again later.
     </h2>
-    <button
-      className={classes.ReturnButton}
-      type="button"
-      name="Return button"
-      value="Return to the initial window"
-    >
-      Take Me Back
-    </button>
+    <Button bName="Return button" bValue="Return to the initial window">
+      Take me back
+    </Button>
   </div>
 );
 
