@@ -6,7 +6,7 @@ import { Button } from '../UI/Button/Button';
 import classes from './Outcome.module.scss';
 import outcomeImage from '../../assets/images/outcomeImage.png';
 
-const Outcome = ({ isSuccess }) => {
+export const Outcome = ({ isSuccess }) => {
   const activeClass = isSuccess
     ? classes.Image
     : `${classes.Image} ${classes.OnFailure}`;
@@ -41,5 +41,3 @@ const Outcome = ({ isSuccess }) => {
 Outcome.propTypes = {
   isSuccess: PropTypes.bool.isRequired,
 };
-
-export default Outcome;

@@ -22,7 +22,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onPostAnswerCreator: (answ) => dispatch(postAnswerCreator(answ)),
+    onPostAnswerCreator: (title, author, answ) =>
+      dispatch(postAnswerCreator(title, author, answ)),
   };
 };
 
@@ -87,7 +88,10 @@ export const QuestionsTablet = connect(
         bName="Answers submit button"
         bValue="Submit answers"
         isDisabled={!isOnSubmit || props.isLoading}
-        clickHandler={() => props.onPostAnswerCreator(props.answ)}
+        clickHandler={
+          () => props.onPostAnswerCreator(props.title, props.author, props.answ)
+          // eslint-disable-next-line react/jsx-curly-newline
+        }
       >
         {isOnSubmit
           ? 'Submit answers'

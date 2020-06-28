@@ -25,7 +25,7 @@ export const postAnswerFailure = (error) => ({
   payload: { error },
 });
 
-export const postAnswerCreator = (answerData) => {
+export const postAnswerCreator = (title, author, answerData) => {
   let source;
   return async (dispatch) => {
     dispatch(postAnswerInitializer());
@@ -38,7 +38,7 @@ export const postAnswerCreator = (answerData) => {
     source = CancelToken.source();
     try {
       const reqResponse = await axiosInstance.post(
-        '/answers.json',
+        `/${title}/${author}/answers.json`,
         JSON.stringify(answerData),
         { cancelToken: source.token }
       );
