@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Button } from '../UI/Button/Button';
+import { activeClassElector } from '../../utilities/utilities';
 
 import classes from './Outcome.module.scss';
 import outcomeImage from '../../assets/images/outcomeImage.png';
 
 export const Outcome = ({ isSuccess }) => {
-  const activeClass = isSuccess
-    ? classes.Image
-    : `${classes.Image} ${classes.OnFailure}`;
+  const activeClass = activeClassElector(
+    isSuccess,
+    classes.Image,
+    classes.OnFailure
+  );
+
   return (
     <div className={classes.Outcome}>
       <img

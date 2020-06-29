@@ -7,3 +7,6 @@ export const handleKeyDown = (event) => {
     scrollToTop();
   }
 };
+
+export const activeClassElector = (elector, mainClass, secondClass) =>
+  elector ? mainClass : `${mainClass} ${secondClass}`;

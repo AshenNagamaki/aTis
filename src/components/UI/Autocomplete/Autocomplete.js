@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-export const Autocomplete = ({ options }) => {
+import { activeClassElector } from '../../../utilities/utilities';
+
+import classes from './Autocomplete.module.scss';
+
+export const handleKeyDown = (event) => {
+  if (event.keyCode === 45) {
+    return '[KEY_DOWN_HANDLER] Autocomplete input field element keyboard listener on "Insert".';
+  }
+  return '[KEY_DOWN_HANDLER] The corresponding keyboard key was not pressed.';
+};
+
+export const Autocomplete = ({ label, options, isDisabled }) => {
   const [completion, setCompletion] = useState({
     activeOption: 0,
     filteredOptions: [],
@@ -57,4 +69,70 @@ export const Autocomplete = ({ options }) => {
         : changeOptionHandler(activeOption + 1);
     }
   };
+
+  let optionList;
+
+  if (showOptions && userInput) {
+    if (filteredOptions.length) {
+      optionList = (
+        <ul className={classes.Options}>
+          {filteredOptions.map((option, index) => (
+            <li
+              role="menuitem"
+              className={activeClassElector(
+                index === activeOption,
+                classes.Option,
+                classes.Active
+              )}
+              key={option}
+              onClick={clickHandler}
+              onKeyDown={handleKeyDown}
+            >
+              {option}
+            </li>
+          ))}
+        </ul>
+      );
+    } else {
+      optionList = (
+        <div className={classes.NoShow}>
+          Nothing to show. You are on your own!
+        </div>
+      );
+    }
+  }
+
+  return (
+    <>
+      <div className={classes.AutocompleteWrapper}>
+        <input
+          className={classes.InputField}
+          id="autocomplete"
+          type="text"
+          name="Autocomplete input field"
+          value={userInput}
+          placeholder={label}
+          onChange={changeHandler}
+          onKeyDown={keyDownHandler}
+          disabled={isDisabled}
+          autoComplete="off"
+        />
+        <label className={classes.Label} htmlFor="autocomplete">
+          {label}
+        </label>
+      </div>
+      {optionList}
+    </>
+  );
+};
+
+Autocomplete.defaultProps = {
+  label: 'I am default label! My owner is too lazy to change me.',
+  isDisabled: false,
+};
+
+Autocomplete.propTypes = {
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isDisabled: PropTypes.bool,
 };

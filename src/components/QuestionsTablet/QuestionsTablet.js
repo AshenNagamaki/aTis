@@ -98,7 +98,6 @@ export const QuestionsTablet = connect(
           : 'Please answer all the questions to proceed'}
       </Button>
       <button
-        visibility="hidden"
         className={classes.QuestionsReturn}
         type="button"
         name="Return button"

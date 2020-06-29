@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { addAnswerCreator } from '../../../store/actionCreators';
-import { handleKeyDown } from '../../../utilities/utilities';
+import {
+  handleKeyDown,
+  activeClassElector,
+} from '../../../utilities/utilities';
 
 import classes from './Option.module.scss';
 
@@ -25,10 +28,11 @@ export const Option = connect(
   mapDispatchToProps
 )((props) => {
   const literalOpt = String.fromCharCode(65 + props.oNum);
-  const activeClasses =
-    props.answersState[props.qNum] === literalOpt
-      ? `${classes.Option} ${classes.Active}`
-      : classes.Option;
+  const activeClasses = activeClassElector(
+    props.answersState[props.qNum] === literalOpt,
+    classes.Option,
+    classes.Active
+  );
   return (
     <li
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
