@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { activeClassElector } from '../../../utilities/utilities';
-
 import classes from './Autocomplete.module.scss';
 
 export const handleKeyDown = (event) => {
@@ -72,19 +70,14 @@ export const Autocomplete = ({ label, options, isActive }) => {
   };
 
   let optionList;
-
-  if (showOptions && userInput) {
+  if (active && userInput && showOptions) {
     if (filteredOptions.length) {
       optionList = (
         <ul className={classes.Options}>
           {filteredOptions.map((option, index) => (
             <li
               role="menuitem"
-              className={activeClassElector(
-                index === activeOption,
-                classes.Option,
-                classes.Active
-              )}
+              className={index === activeOption ? classes.Active : undefined}
               key={option}
               onClick={clickHandler}
               onKeyDown={handleKeyDown}

@@ -1,8 +1,10 @@
 @import '../../../utilities/utilities.scss';
 
+$width-default: 27.5%;
 $height-default: 5.65rem;
-$border-radius-default: 0.5rem;
+$border-radius-default: 0.3rem;
 $box-shadow-default: 0 0.4rem 2rem 0;
+$font-size-default: 112.5%;
 $transition-default: 0.33s background-color ease-in-out,
   0.33s box-shadow ease-in-out;
 
@@ -12,6 +14,11 @@ $transition-default: 0.33s background-color ease-in-out,
 
 @mixin background-color-transparentize($amount) {
   background-color: transparentize($general-background-color, $amount);
+}
+
+@mixin target-option-color-scheme {
+  background-color: #e6e6e6;
+  color: $main-color;
 }
 
 @mixin box-shadow-transparentize($amount) {
@@ -28,7 +35,7 @@ $transition-default: 0.33s background-color ease-in-out,
 
 .InputField {
   position: relative;
-  width: 27.5%;
+  width: $width-default;
   height: $height-default;
   border-radius: $border-radius-default;
   font-family: sans-serif;
@@ -40,7 +47,7 @@ $transition-default: 0.33s background-color ease-in-out,
   &.Active {
     @include background-shadow-transparentize(0, 0.2);
     input {
-      padding: 1rem 1.6rem 0.8rem;
+      padding: 1rem 0 0 1.6rem;
       + label {
         top: 0.45rem;
         color: $main-color;
@@ -61,7 +68,7 @@ $transition-default: 0.33s background-color ease-in-out,
     outline: none;
     background-color: transparent;
     box-shadow: $box-shadow-default transparent;
-    font-size: 112.5%;
+    font-size: $font-size-default;
     line-height: normal;
     color: $general-text-color;
     transition: $transition-default, 0.1s padding ease-in-out;
@@ -91,4 +98,41 @@ $transition-default: 0.33s background-color ease-in-out,
       pointer-events: none;
     }
   }
+}
+
+ul.Options {
+  width: $width-default;
+  margin: 0;
+  padding: 0;
+  box-shadow: $general-box-shadow;
+  list-style-type: none;
+  transition: width 0.33s;
+  li {
+    padding: 1.85rem;
+    background-color: $general-background-color;
+    font-size: $font-size-default;
+    &:first-of-type {
+      margin-top: 0.15rem;
+      border-radius: $border-radius-default $border-radius-default 0 0;
+    }
+    &:last-of-type {
+      border-radius: 0 0 $border-radius-default $border-radius-default;
+    }
+    &:hover {
+      cursor: pointer;
+      @include target-option-color-scheme;
+    }
+    &.Active {
+      @include target-option-color-scheme;
+    }
+  }
+}
+
+.NoShow {
+  width: $width-default;
+  margin: 1rem;
+  padding: 0;
+  font-size: 105%;
+  color: $general-background-color;
+  opacity: 0.75;
 }
