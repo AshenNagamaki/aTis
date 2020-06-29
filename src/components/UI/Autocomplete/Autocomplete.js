@@ -12,7 +12,7 @@ export const handleKeyDown = (event) => {
   return '[KEY_DOWN_HANDLER] The corresponding keyboard key was not pressed.';
 };
 
-export const Autocomplete = ({ label, options, isDisabled }) => {
+export const Autocomplete = ({ label, options, isActive }) => {
   const [completion, setCompletion] = useState({
     activeOption: 0,
     filteredOptions: [],
@@ -21,6 +21,7 @@ export const Autocomplete = ({ label, options, isDisabled }) => {
   });
 
   const { activeOption, filteredOptions, showOptions, userInput } = completion;
+  const [active, setActive] = useState(!isActive);
 
   const changeHandler = (e) => {
     const currentUserInput = e.currentTarget.value;
@@ -102,11 +103,14 @@ export const Autocomplete = ({ label, options, isDisabled }) => {
     }
   }
 
+  const classNameInUse = `${classes.InputField} ${
+    (!isActive ? active : active || userInput) && classes.Active
+  } ${!isActive && !active && classes.Inactive}`;
+
   return (
     <>
-      <div className={classes.AutocompleteWrapper}>
+      <div className={classNameInUse}>
         <input
-          className={classes.InputField}
           id="autocomplete"
           type="text"
           name="Autocomplete input field"
@@ -114,12 +118,12 @@ export const Autocomplete = ({ label, options, isDisabled }) => {
           placeholder={label}
           onChange={changeHandler}
           onKeyDown={keyDownHandler}
-          disabled={isDisabled}
+          onFocus={() => isActive && setActive(true)}
+          onBlur={() => isActive && setActive(false)}
+          disabled={!isActive}
           autoComplete="off"
         />
-        <label className={classes.Label} htmlFor="autocomplete">
-          {label}
-        </label>
+        <label htmlFor="autocomplete">{label}</label>
       </div>
       {optionList}
     </>
@@ -127,12 +131,12 @@ export const Autocomplete = ({ label, options, isDisabled }) => {
 };
 
 Autocomplete.defaultProps = {
-  label: 'I am default label! My owner is too lazy to change me.',
-  isDisabled: false,
+  label: 'I am a default label! My owner is too lazy to change me.',
+  isActive: false,
 };
 
 Autocomplete.propTypes = {
   label: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  isDisabled: PropTypes.bool,
+  isActive: PropTypes.bool,
 };
