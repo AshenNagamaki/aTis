@@ -1,1 +1,1 @@
-# poTs - Private Online Testing Service
+# aTis - Anonymous Testing Intelligent Service

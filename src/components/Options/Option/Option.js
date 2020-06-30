@@ -28,11 +28,13 @@ export const Option = connect(
   mapDispatchToProps
 )((props) => {
   const literalOpt = String.fromCharCode(65 + props.oNum);
+
   const activeClasses = activeClassElector(
     props.answersState[props.qNum] === literalOpt,
     classes.Option,
     classes.Active
   );
+
   return (
     <li
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role

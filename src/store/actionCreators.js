@@ -3,6 +3,9 @@ import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import { axiosInstance } from '../utilities/axios-utilities';
 
+const reqCancelNotification =
+  '[CANCELLATION PROCESS] Operation canceled due to the API limits.';
+
 export const addAnswerCreator = (qNum, oNum) => {
   return {
     type: actionTypes.ADD_ANSWER,
@@ -25,20 +28,18 @@ export const postAnswerFailure = (error) => ({
   payload: { error },
 });
 
-export const postAnswerCreator = (title, author, answerData) => {
+export const postAnswerCreator = (title, answerData) => {
   let source;
   return async (dispatch) => {
     dispatch(postAnswerInitializer());
     if (source) {
-      source.cancel(
-        '[CANCELLATION PROCESS] Operation canceled due to the API limits.'
-      );
+      source.cancel(reqCancelNotification);
     }
     const { CancelToken } = axios;
     source = CancelToken.source();
     try {
       const reqResponse = await axiosInstance.post(
-        `/${title}/${author}/answers.json`,
+        `/gathered/${title}/answers.json`,
         JSON.stringify(answerData),
         { cancelToken: source.token }
       );
@@ -46,9 +47,7 @@ export const postAnswerCreator = (title, author, answerData) => {
     } catch (reqError) {
       dispatch(postAnswerFailure(reqError));
     } finally {
-      source.cancel(
-        '[CANCELLATION PROCESS] Operation canceled due to the API limits.'
-      );
+      source.cancel(reqCancelNotification);
     }
   };
 };

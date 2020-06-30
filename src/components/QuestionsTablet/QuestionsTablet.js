@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Question } from '../Question/Question';
 import { Button } from '../UI/Button/Button';
 import { Loader } from '../UI/Loader/Loader';
+
 import { postAnswerCreator } from '../../store/actionCreators';
 import { scrollToTop, handleKeyDown } from '../../utilities/utilities';
 
@@ -22,8 +23,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onPostAnswerCreator: (title, author, answ) =>
-      dispatch(postAnswerCreator(title, author, answ)),
+    onPostAnswerCreator: (title, answ) =>
+      dispatch(postAnswerCreator(title, answ)),
   };
 };
 
@@ -89,7 +90,7 @@ export const QuestionsTablet = connect(
         bValue="Submit answers"
         isDisabled={!isOnSubmit || props.isLoading}
         clickHandler={
-          () => props.onPostAnswerCreator(props.title, props.author, props.answ)
+          () => props.onPostAnswerCreator(props.title, props.answ)
           // eslint-disable-next-line react/jsx-curly-newline
         }
       >

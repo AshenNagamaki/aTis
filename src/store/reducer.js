@@ -43,6 +43,7 @@ export const reducer = (state = initialState, action) => {
           reqFailed: true,
         },
       };
+
     default:
       return state;
   }
