@@ -2,6 +2,7 @@
 
 $width-default: 27.5%;
 $height-default: 5.65rem;
+$arrow-padding: 1.5rem;
 $border-radius-default: 0.3rem;
 $box-shadow-default: 0 0.4rem 2rem 0;
 $font-size-default: 112.5%;
@@ -96,6 +97,16 @@ $transition-default: 0.33s background-color ease-in-out,
       opacity: 0;
       transition: 0.1s all ease-in-out;
       pointer-events: none;
+    }
+  }
+  .ContinueWrapper {
+    position: absolute;
+    bottom: 10%;
+    right: -12.5%;
+    margin: 0;
+    padding: $arrow-padding;
+    .ContinueArrow {
+      @include arrow($arrow-padding, -45deg);
     }
   }
 }

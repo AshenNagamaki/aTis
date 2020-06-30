@@ -19,6 +19,7 @@ export const Autocomplete = ({ label, options, isActive }) => {
   });
 
   const { activeOption, filteredOptions, showOptions, userInput } = completion;
+
   const [active, setActive] = useState(!isActive);
 
   const changeHandler = (e) => {
@@ -70,7 +71,8 @@ export const Autocomplete = ({ label, options, isActive }) => {
   };
 
   let optionList;
-  if (active && userInput && showOptions) {
+
+  if (userInput && showOptions) {
     if (filteredOptions.length) {
       optionList = (
         <ul className={classes.Options}>
@@ -96,6 +98,12 @@ export const Autocomplete = ({ label, options, isActive }) => {
     }
   }
 
+  const continueButton = (
+    <div htmlFor="autocomplete" className={classes.ContinueWrapper}>
+      <span className={classes.ContinueArrow} title="Continue to the test" />
+    </div>
+  );
+
   const classNameInUse = `${classes.InputField} ${
     (!isActive ? active : active || userInput) && classes.Active
   } ${!isActive && !active && classes.Inactive}`;
@@ -117,6 +125,7 @@ export const Autocomplete = ({ label, options, isActive }) => {
           autoComplete="off"
         />
         <label htmlFor="autocomplete">{label}</label>
+        {isActive && userInput && options.includes(userInput) && continueButton}
       </div>
       {optionList}
     </>
@@ -125,7 +134,7 @@ export const Autocomplete = ({ label, options, isActive }) => {
 
 Autocomplete.defaultProps = {
   label: 'I am a default label! My owner is too lazy to change me.',
-  isActive: false,
+  isActive: true,
 };
 
 Autocomplete.propTypes = {
