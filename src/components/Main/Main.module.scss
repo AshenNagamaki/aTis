@@ -1,0 +1,15 @@
+@import '../../utilities/utilities.scss';
+
+.Main {
+  display: flex;
+  position: absolute;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  .Title {
+    margin: 37.5rem 0 5rem;
+    font-size: 275%;
+    color: $general-background-color;
+  }
+}
