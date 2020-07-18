@@ -1,3 +1,5 @@
 import React from 'react';
 
-export const App = () => <></>;
+import { Main } from './components/Main/Main';
+
+export const App = () => <Main />;
