@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { Question } from '../Question/Question';
 import { Button } from '../UI/Button/Button';
 import { Loader } from '../UI/Loader/Loader';
 
-import { postAnswerCreator } from '../../store/actionCreators';
+import { requestCreator } from '../../store/actionCreators';
 import { scrollToTop, handleKeyDown } from '../../utilities/utilities';
 
 import classes from './QuestionsTablet.module.scss';
 
 const mapStateToProps = (state) => {
   return {
-    title: state.title,
-    author: state.author,
-    que: state.questions,
-    opt: state.options,
+    testData: state.test,
     answ: state.answers,
     isLoading: state.isLoading,
+    reqResp: state.reqResponse,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onPostAnswerCreator: (title, answ) =>
-      dispatch(postAnswerCreator(title, answ)),
+      dispatch(requestCreator('POST_ANSWER', title, answ)),
   };
 };
 
@@ -33,6 +32,10 @@ export const QuestionsTablet = connect(
   mapDispatchToProps
 )((props) => {
   const [isScrollVisible, setIsScrollVisible] = useState(false);
+
+  const { topic, author, questions, options } = props.testData;
+
+  const history = useHistory();
 
   const toggleScrollVisibility = () => {
     // eslint-disable-next-line no-unused-expressions
@@ -47,9 +50,10 @@ export const QuestionsTablet = connect(
   }, []);
 
   const isOnSubmit =
-    props.que.length &&
+    questions &&
+    questions.length &&
     JSON.parse(JSON.stringify(props.answ)).filter((el) => el).length ===
-      props.que.length;
+      questions.length;
 
   const returnButton = (
     <div className={classes.ReturnWrapper}>
@@ -74,14 +78,16 @@ export const QuestionsTablet = connect(
     </div>
   );
 
-  const questionsData = props.que.map((question, index) => (
-    <Question
-      key={`${question}`}
-      qNum={index}
-      question={question}
-      options={props.opt[index]}
-    />
-  ));
+  const questionsData =
+    questions &&
+    questions.map((question, index) => (
+      <Question
+        key={`${question}`}
+        qNum={index}
+        question={question}
+        options={options && options[index]}
+      />
+    ));
 
   const submitInterface = (
     <>
@@ -90,7 +96,7 @@ export const QuestionsTablet = connect(
         bValue="Submit answers"
         isDisabled={!isOnSubmit || props.isLoading}
         clickHandler={
-          () => props.onPostAnswerCreator(props.title, props.answ)
+          () => props.onPostAnswerCreator(topic, props.answ)
           // eslint-disable-next-line react/jsx-curly-newline
         }
       >
@@ -109,13 +115,23 @@ export const QuestionsTablet = connect(
     </>
   );
 
+  if (Object.keys(props.reqResp).length > 1) {
+    history.push('/outcome');
+  }
+
   const questionsTablet = (
     <section className={classes.QuestionsWrapper}>
-      <h1 className={classes.Title}>{props.title}</h1>
-      <h3 className={classes.Author}>{props.author && `by ${props.author}`}</h3>
+      <h1 className={classes.Title}>{topic}</h1>
+      <h3 className={classes.Author}>{author && `by ${author}`}</h3>
       {!props.isLoading && returnButton}
       <ul className={classes.Questions}>{questionsData}</ul>
-      {props.isLoading ? <Loader /> : submitInterface}
+      {props.isLoading ? (
+        <section className={classes.Loading}>
+          <Loader />
+        </section>
+      ) : (
+        submitInterface
+      )}
       {isScrollVisible && scrollToTopButton}
     </section>
   );

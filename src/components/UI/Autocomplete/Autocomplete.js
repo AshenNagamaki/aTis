@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import { requestCreator } from '../../../store/actionCreators';
+import { handleKeyDown } from '../../../utilities/utilities';
 
 import classes from './Autocomplete.module.scss';
 
-export const handleKeyDown = (event) => {
+export const handleKeyDownLocal = (event) => {
   if (event.keyCode === 45) {
     return '[KEY_DOWN_HANDLER] Autocomplete input field element keyboard listener on "Insert".';
   }
   return '[KEY_DOWN_HANDLER] The corresponding keyboard key was not pressed.';
 };
 
-export const Autocomplete = ({ label, options, isActive }) => {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onGetTestCreator: (topic) => dispatch(requestCreator('GET_TEST', topic)),
+  };
+};
+
+export const Autocomplete = connect(
+  null,
+  mapDispatchToProps
+)(({ label, options, isActive, onGetTestCreator }) => {
   const [completion, setCompletion] = useState({
     activeOption: 0,
     filteredOptions: [],
@@ -21,6 +35,8 @@ export const Autocomplete = ({ label, options, isActive }) => {
   const { activeOption, filteredOptions, showOptions, userInput } = completion;
 
   const [active, setActive] = useState(!isActive);
+
+  const history = useHistory();
 
   const changeHandler = (e) => {
     const currentUserInput = e.currentTarget.value;
@@ -100,7 +116,18 @@ export const Autocomplete = ({ label, options, isActive }) => {
 
   const continueButton = (
     <div htmlFor="autocomplete" className={classes.ContinueWrapper}>
-      <span className={classes.ContinueArrow} title="Continue to the test" />
+      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+      <span
+        role="button"
+        tabIndex={0}
+        className={classes.ContinueArrow}
+        title="Continue to the test"
+        onClick={() => {
+          onGetTestCreator(completion.userInput);
+          history.push('/test');
+        }}
+        onKeyDown={handleKeyDownLocal}
+      />
     </div>
   );
 
@@ -130,7 +157,7 @@ export const Autocomplete = ({ label, options, isActive }) => {
       {optionList}
     </>
   );
-};
+});
 
 Autocomplete.defaultProps = {
   label: 'I am a default label! My owner is too lazy to change me.',

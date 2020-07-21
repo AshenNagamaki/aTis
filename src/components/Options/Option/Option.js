@@ -30,7 +30,7 @@ export const Option = connect(
   const literalOpt = String.fromCharCode(65 + props.oNum);
 
   const activeClasses = activeClassElector(
-    props.answersState[props.qNum] === literalOpt,
+    props.answersState[props.qNum] !== literalOpt,
     classes.Option,
     classes.Active
   );

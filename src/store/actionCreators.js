@@ -14,38 +14,63 @@ export const addAnswerCreator = (qNum, oNum) => {
   };
 };
 
-export const postAnswerInitializer = () => ({
-  type: actionTypes.POST_ANSWER_INITIALIZER,
+export const initializeRequest = () => ({
+  type: actionTypes.INITIALIZE_REQUEST,
 });
 
-export const postAnswerSuccess = (respData) => ({
-  type: actionTypes.POST_ANSWER_SUCCESS,
-  payload: { ...respData },
+export const postAnswerRequest = (respData) => ({
+  type: actionTypes.POST_ANSWER_REQUEST,
+  payload: respData,
 });
 
-export const postAnswerFailure = (error) => ({
-  type: actionTypes.POST_ANSWER_FAILURE,
-  payload: { ...error },
+export const getTestRequest = (respData) => ({
+  type: actionTypes.GET_TEST_REQUEST,
+  payload: respData,
 });
 
-export const postAnswerCreator = (title, answerData) => {
+export const getTopicsRequest = (respData) => ({
+  type: actionTypes.GET_TOPICS_REQUEST,
+  payload: respData,
+});
+
+export const requestFailure = (error) => ({
+  type: actionTypes.REQUEST_FAILURE,
+  payload: error,
+});
+
+export const requestCreator = (type, ...config) => {
   let source;
   return async (dispatch) => {
-    dispatch(postAnswerInitializer());
+    dispatch(initializeRequest());
     if (source) {
       source.cancel(reqCancelNotification);
     }
     const { CancelToken } = axios;
     source = CancelToken.source();
+    let reqResponse;
     try {
-      const reqResponse = await axiosInstance.post(
-        `/gathered/${title}/answers.json`,
-        JSON.stringify(answerData),
-        { cancelToken: source.token }
-      );
-      dispatch(postAnswerSuccess(reqResponse));
+      if (type === 'POST_ANSWER') {
+        const [title, answerData] = config;
+        reqResponse = await axiosInstance.post(
+          `/gathered/${title}/answers.json`,
+          JSON.stringify(answerData),
+          { cancelToken: source.token }
+        );
+        dispatch(postAnswerRequest(reqResponse.data));
+      } else if (type === 'GET_TEST') {
+        const topic = config;
+        reqResponse = await axiosInstance.get(`/test/${topic}.json`, {
+          cancelToken: source.token,
+        });
+        dispatch(getTestRequest(reqResponse.data));
+      } else if (type === 'GET_TOPICS') {
+        reqResponse = await axiosInstance.get(`/topics.json`, {
+          cancelToken: source.token,
+        });
+        dispatch(getTopicsRequest(reqResponse.data));
+      }
     } catch (reqError) {
-      dispatch(postAnswerFailure(reqError));
+      dispatch(requestFailure(reqError));
     }
   };
 };

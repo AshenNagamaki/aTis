@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import { Button } from '../UI/Button/Button';
 import { activeClassElector } from '../../utilities/utilities';
@@ -7,12 +9,22 @@ import { activeClassElector } from '../../utilities/utilities';
 import classes from './Outcome.module.scss';
 import outcomeImage from '../../assets/images/outcomeImage.png';
 
-export const Outcome = ({ isSuccess }) => {
+const mapStateToProps = (state) => {
+  return {
+    reqResp: state.reqResponse,
+  };
+};
+
+export const Outcome = connect(mapStateToProps)((props) => {
+  const isSuccess = props.reqResp && !props.reqResp.reqFailed;
+
   const activeClass = activeClassElector(
     isSuccess,
     classes.Image,
     classes.OnFailure
   );
+
+  const history = useHistory();
 
   return (
     <div className={classes.Outcome}>
@@ -35,12 +47,16 @@ export const Outcome = ({ isSuccess }) => {
           : 'We had some issues submitting your answers. Please try again later.'}
       </h5>
 
-      <Button bName="Return button" bValue="Return to the initial window">
+      <Button
+        bName="Return button"
+        bValue="Return to the initial window"
+        clickHandler={() => history.replace('/')}
+      >
         Take me back
       </Button>
     </div>
   );
-};
+});
 
 Outcome.propTypes = {
   isSuccess: PropTypes.bool.isRequired,

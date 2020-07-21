@@ -1,5 +1,6 @@
 import { initialState } from './initialState';
 import * as actionTypes from './actionTypes';
+import { parseError } from '../utilities/utilities';
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -11,35 +12,42 @@ export const reducer = (state = initialState, action) => {
       }
       return state;
 
-    case actionTypes.POST_ANSWER_INITIALIZER:
+    case actionTypes.INITIALIZE_REQUEST:
       return { ...state, isLoading: true };
 
-    case actionTypes.POST_ANSWER_SUCCESS:
+    case actionTypes.GET_TOPICS_REQUEST:
       return {
-        title: '',
-        author: '',
-        questions: [],
-        options: [],
+        ...state,
+        availableTopics: action.payload,
+        isLoading: false,
+        reqResponse: { reqFailed: false },
+      };
+
+    case actionTypes.GET_TEST_REQUEST:
+      return {
+        ...state,
+        test: action.payload,
+        isLoading: false,
+        reqResponse: { reqFailed: false },
+      };
+
+    case actionTypes.POST_ANSWER_REQUEST:
+      return {
+        ...state,
+        test: {},
         answers: [],
         isLoading: false,
         reqResponse: { ...action.payload, reqFailed: false },
       };
 
-    case actionTypes.POST_ANSWER_FAILURE:
+    case actionTypes.REQUEST_FAILURE:
       return {
-        title: '',
-        author: '',
-        questions: [],
-        options: [],
+        ...state,
+        test: {},
         answers: [],
         isLoading: false,
         reqResponse: {
-          ...JSON.parse(
-            JSON.stringify(
-              action.payload,
-              Object.getOwnPropertyNames(action.payload)
-            )
-          ),
+          ...parseError(action.payload),
           reqFailed: true,
         },
       };

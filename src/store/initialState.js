@@ -1,8 +1,6 @@
 export const initialState = {
-  title: '',
-  author: '',
-  questions: [],
-  options: [],
+  availableTopics: [],
+  test: {},
   answers: [],
   isLoading: false,
   reqResponse: null,
