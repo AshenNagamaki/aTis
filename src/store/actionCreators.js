@@ -25,7 +25,7 @@ export const postAnswerSuccess = (respData) => ({
 
 export const postAnswerFailure = (error) => ({
   type: actionTypes.POST_ANSWER_FAILURE,
-  payload: { error },
+  payload: { ...error },
 });
 
 export const postAnswerCreator = (title, answerData) => {
@@ -46,8 +46,6 @@ export const postAnswerCreator = (title, answerData) => {
       dispatch(postAnswerSuccess(reqResponse));
     } catch (reqError) {
       dispatch(postAnswerFailure(reqError));
-    } finally {
-      source.cancel(reqCancelNotification);
     }
   };
 };

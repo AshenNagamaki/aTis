@@ -36,8 +36,8 @@ export const reducer = (state = initialState, action) => {
         reqResponse: {
           ...JSON.parse(
             JSON.stringify(
-              action.payload.error,
-              Object.getOwnPropertyNames(action.payload.error)
+              action.payload,
+              Object.getOwnPropertyNames(action.payload)
             )
           ),
           reqFailed: true,
