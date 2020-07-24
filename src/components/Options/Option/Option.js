@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { addAnswerCreator } from '../../../store/actionCreators';
 import {
-  handleKeyDown,
+  handleKeyDownCreator,
   activeClassElector,
 } from '../../../utilities/utilities';
 
@@ -26,11 +26,11 @@ const mapDispatchToProps = (dispatch) => {
 export const Option = connect(
   mapStateToProps,
   mapDispatchToProps
-)((props) => {
-  const literalOpt = String.fromCharCode(65 + props.oNum);
+)(({ qNum, oNum, option, answersState, isLoading, onAddAnswer }) => {
+  const literalOpt = String.fromCharCode(65 + oNum);
 
   const activeClasses = activeClassElector(
-    props.answersState[props.qNum] !== literalOpt,
+    answersState[qNum] !== literalOpt,
     classes.Option,
     classes.Active
   );
@@ -42,12 +42,15 @@ export const Option = connect(
       className={activeClasses}
       onClick={() => {
         // eslint-disable-next-line no-unused-expressions
-        !props.isLoading && props.onAddAnswer(props.qNum, literalOpt);
+        !isLoading && onAddAnswer(qNum, literalOpt);
       }}
-      onKeyDown={handleKeyDown}
+      onKeyDown={
+        (event) => handleKeyDownCreator(event, onAddAnswer(qNum, literalOpt))
+        // eslint-disable-next-line react/jsx-curly-newline
+      }
     >
       {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-      {literalOpt} {props.option}
+      {literalOpt} {option}
     </li>
   );
 });

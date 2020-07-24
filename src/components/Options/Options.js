@@ -9,6 +9,7 @@ export const Options = ({ qNum, options }) => {
   const optionsData = options.map((option, index) => (
     <Option key={option} qNum={qNum} oNum={index} option={option} />
   ));
+
   return <ol className={classes.Options}>{optionsData}</ol>;
 };
 

@@ -3,5 +3,5 @@ export const initialState = {
   test: {},
   answers: [],
   isLoading: false,
-  reqResponse: null,
+  reqResponse: {},
 };

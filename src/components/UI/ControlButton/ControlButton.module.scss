@@ -1,0 +1,23 @@
+@import '../../../utilities/utilities.scss';
+
+$arrow-size: 1.5rem;
+
+@mixin generateArrow($angle) {
+  @include arrow($arrow-size, $angle);
+}
+
+.ArrowTop {
+  @include generateArrow(-135deg);
+}
+
+.ArrowRight {
+  @include generateArrow(-45deg);
+}
+
+.ArrowBottom {
+  @include generateArrow(45deg);
+}
+
+.ArrowLeft {
+  @include generateArrow(135deg);
+}

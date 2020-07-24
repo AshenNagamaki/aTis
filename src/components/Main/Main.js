@@ -8,7 +8,7 @@ import classes from './Main.module.scss';
 
 const mapStateToProps = (state) => {
   return {
-    localOpts: state.availableTopics,
+    opts: state.availableTopics,
     isLoading: state.isLoading,
   };
 };
@@ -22,22 +22,22 @@ const mapDispatchToProps = (dispatch) => {
 export const Main = connect(
   mapStateToProps,
   mapDispatchToProps
-)(({ localOpts, isLoading, onGetTopicsCreator }) => {
+)(({ opts, isLoading, onGetTopicsCreator }) => {
   useEffect(() => {
     onGetTopicsCreator();
   }, [onGetTopicsCreator]);
 
   return (
-    <section className={classes.Main}>
+    <main className={classes.Main}>
       <h1 className={classes.Title}>
         {isLoading ? 'Wait a second ...' : 'Just start typing ...'}
       </h1>
       {!isLoading && (
         <Autocomplete
           label="Anonymous Testing Intelligent Service"
-          options={localOpts}
+          options={opts}
         />
       )}
-    </section>
+    </main>
   );
 });

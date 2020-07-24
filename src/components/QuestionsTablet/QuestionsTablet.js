@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 import { Question } from '../Question/Question';
 import { Button } from '../UI/Button/Button';
-import { Loader } from '../UI/Loader/Loader';
-
-import { requestCreator } from '../../store/actionCreators';
-import { scrollToTop, handleKeyDown } from '../../utilities/utilities';
+import { ControlButton } from '../UI/ControlButton/ControlButton';
+import { clearStateCreator, requestCreator } from '../../store/actionCreators';
+import { scrollToTop } from '../../utilities/utilities';
 
 import classes from './QuestionsTablet.module.scss';
 
@@ -24,117 +23,123 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onPostAnswerCreator: (title, answ) =>
       dispatch(requestCreator('POST_ANSWER', title, answ)),
+    onClearStateCreator: () => dispatch(clearStateCreator()),
   };
 };
 
 export const QuestionsTablet = connect(
   mapStateToProps,
   mapDispatchToProps
-)((props) => {
-  const [isScrollVisible, setIsScrollVisible] = useState(false);
+)(
+  ({
+    testData,
+    answ,
+    isLoading,
+    reqResp,
+    onPostAnswerCreator,
+    onClearStateCreator,
+    history,
+  }) => {
+    const [isScrollVisible, setIsScrollVisible] = useState(false);
 
-  const { topic, author, questions, options } = props.testData;
+    const { topic, author, questions, options } = testData;
 
-  const history = useHistory();
+    const returnOnClickHandler = () => {
+      onClearStateCreator();
+      history.push('/');
+    };
 
-  const toggleScrollVisibility = () => {
-    // eslint-disable-next-line no-unused-expressions
-    window.pageYOffset > 325
-      ? setIsScrollVisible(true)
-      : setIsScrollVisible(false);
-  };
+    const toggleScrollVisibility = () => {
+      // eslint-disable-next-line no-unused-expressions
+      window.pageYOffset > 325
+        ? setIsScrollVisible(true)
+        : setIsScrollVisible(false);
+    };
 
-  useEffect(() => {
-    document.addEventListener('scroll', toggleScrollVisibility);
-    return () => window.removeEventListener('scroll', toggleScrollVisibility);
-  }, []);
+    useEffect(() => {
+      document.addEventListener('scroll', toggleScrollVisibility);
+      return () => window.removeEventListener('scroll', toggleScrollVisibility);
+    }, []);
 
-  const isOnSubmit =
-    questions &&
-    questions.length &&
-    JSON.parse(JSON.stringify(props.answ)).filter((el) => el).length ===
-      questions.length;
+    useEffect(() => {
+      if (Object.keys(reqResp).length > 1) {
+        history.push('/outcome');
+      }
+    }, [reqResp, history]);
 
-  const returnButton = (
-    <div className={classes.ReturnWrapper}>
-      <span
-        className={classes.ReturnArrow}
+    const isOnSubmit =
+      questions &&
+      questions.length &&
+      JSON.parse(JSON.stringify(answ)).filter((el) => el).length ===
+        questions.length;
+
+    const returnButton = (
+      <ControlButton
+        direction="left"
+        outerClass={classes.ReturnWrapper}
         title="Return to the initial window"
+        clickHandler={returnOnClickHandler}
       />
-    </div>
-  );
+    );
 
-  const scrollToTopButton = (
-    <div className={classes.BackToTopWrapper}>
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <span
-        role="button"
-        tabIndex={0}
-        className={classes.BackToTopArrow}
+    const scrollToTopButton = (
+      <ControlButton
+        direction="top"
+        outerClass={classes.BackToTopWrapper}
         title="Back to top"
-        onClick={scrollToTop}
-        onKeyDown={handleKeyDown}
+        clickHandler={scrollToTop}
       />
-    </div>
-  );
+    );
 
-  const questionsData =
-    questions &&
-    questions.map((question, index) => (
-      <Question
-        key={`${question}`}
-        qNum={index}
-        question={question}
-        options={options && options[index]}
-      />
-    ));
+    const loader = <Loader type="Audio" visible={isLoading} color="#f7f7f7" />;
 
-  const submitInterface = (
-    <>
-      <Button
-        bName="Answers submit button"
-        bValue="Submit answers"
-        isDisabled={!isOnSubmit || props.isLoading}
-        clickHandler={
-          () => props.onPostAnswerCreator(topic, props.answ)
-          // eslint-disable-next-line react/jsx-curly-newline
-        }
-      >
-        {isOnSubmit
-          ? 'Submit answers'
-          : 'Please answer all the questions to proceed'}
-      </Button>
-      <button
-        className={classes.QuestionsReturn}
-        type="button"
-        name="Return button"
-        value="OR return to the initial window"
-      >
-        OR return to the initial window
-      </button>
-    </>
-  );
+    const questionsData =
+      questions &&
+      questions.length &&
+      questions.map((question, index) => (
+        <Question
+          key={`${question}`}
+          qNum={index}
+          question={question}
+          options={options && options[index]}
+        />
+      ));
 
-  if (Object.keys(props.reqResp).length > 1) {
-    history.push('/outcome');
+    const submitInterface = (
+      <>
+        <Button
+          bName="Answers submit button"
+          bValue="Submit answers"
+          isDisabled={!isOnSubmit || isLoading}
+          clickHandler={() => onPostAnswerCreator(topic, answ)}
+        >
+          {isOnSubmit
+            ? 'Submit answers'
+            : 'Please answer all the questions to proceed'}
+        </Button>
+        <button
+          className={classes.QuestionsReturn}
+          type="button"
+          name="Return button"
+          value="OR return to the initial window"
+          onClick={returnOnClickHandler}
+        >
+          OR return to the initial window
+        </button>
+      </>
+    );
+
+    const questionsTablet = (
+      <section className={classes.QuestionsWrapper}>
+        <h1 className={classes.Title}>{topic}</h1>
+        <h3 className={classes.Author}>{author && `by ${author}`}</h3>
+        {!isLoading && returnButton}
+        <ul className={classes.Questions}>{questionsData}</ul>
+        {isLoading ? loader : submitInterface}
+        {isScrollVisible && scrollToTopButton}
+      </section>
+    );
+
+    return questionsTablet;
   }
-
-  const questionsTablet = (
-    <section className={classes.QuestionsWrapper}>
-      <h1 className={classes.Title}>{topic}</h1>
-      <h3 className={classes.Author}>{author && `by ${author}`}</h3>
-      {!props.isLoading && returnButton}
-      <ul className={classes.Questions}>{questionsData}</ul>
-      {props.isLoading ? (
-        <section className={classes.Loading}>
-          <Loader />
-        </section>
-      ) : (
-        submitInterface
-      )}
-      {isScrollVisible && scrollToTopButton}
-    </section>
-  );
-
-  return questionsTablet;
-});
+);

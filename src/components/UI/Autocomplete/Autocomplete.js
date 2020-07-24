@@ -3,17 +3,11 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import { ControlButton } from '../ControlButton/ControlButton';
 import { requestCreator } from '../../../store/actionCreators';
-import { handleKeyDown } from '../../../utilities/utilities';
+import { handleKeyDownCreator } from '../../../utilities/utilities';
 
 import classes from './Autocomplete.module.scss';
-
-export const handleKeyDownLocal = (event) => {
-  if (event.keyCode === 45) {
-    return '[KEY_DOWN_HANDLER] Autocomplete input field element keyboard listener on "Insert".';
-  }
-  return '[KEY_DOWN_HANDLER] The corresponding keyboard key was not pressed.';
-};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -40,10 +34,12 @@ export const Autocomplete = connect(
 
   const changeHandler = (e) => {
     const currentUserInput = e.currentTarget.value;
+
     const forFilteredOptions = options.filter(
       (option) =>
         option.toLowerCase().indexOf(currentUserInput.toLowerCase()) > -1
     );
+
     setCompletion({
       activeOption: 0,
       filteredOptions: forFilteredOptions,
@@ -98,7 +94,10 @@ export const Autocomplete = connect(
               className={index === activeOption ? classes.Active : undefined}
               key={option}
               onClick={clickHandler}
-              onKeyDown={handleKeyDown}
+              onKeyDown={
+                (event) => handleKeyDownCreator(event, clickHandler)
+                // eslint-disable-next-line react/jsx-curly-newline
+              }
             >
               {option}
             </li>
@@ -114,21 +113,18 @@ export const Autocomplete = connect(
     }
   }
 
+  const getTestOnClickHandler = () => {
+    onGetTestCreator(completion.userInput);
+    history.push('/test');
+  };
+
   const continueButton = (
-    <div htmlFor="autocomplete" className={classes.ContinueWrapper}>
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <span
-        role="button"
-        tabIndex={0}
-        className={classes.ContinueArrow}
-        title="Continue to the test"
-        onClick={() => {
-          onGetTestCreator(completion.userInput);
-          history.push('/test');
-        }}
-        onKeyDown={handleKeyDownLocal}
-      />
-    </div>
+    <ControlButton
+      direction="right"
+      outerClass={classes.ContinueWrapper}
+      title="Continue to the test"
+      clickHandler={getTestOnClickHandler}
+    />
   );
 
   const classNameInUse = `${classes.InputField} ${

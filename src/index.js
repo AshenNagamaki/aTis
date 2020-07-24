@@ -15,7 +15,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
-  <Router>
+  <Router forceRefresh={false} keyLength={12}>
     <Provider store={store}>
       <App />
     </Provider>

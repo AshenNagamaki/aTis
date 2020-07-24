@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
 
 import { Button } from '../UI/Button/Button';
 import { activeClassElector } from '../../utilities/utilities';
@@ -15,16 +13,14 @@ const mapStateToProps = (state) => {
   };
 };
 
-export const Outcome = connect(mapStateToProps)((props) => {
-  const isSuccess = props.reqResp && !props.reqResp.reqFailed;
+export const Outcome = connect(mapStateToProps)(({ reqResp, history }) => {
+  const isSuccess = reqResp && !reqResp.reqFailed;
 
   const activeClass = activeClassElector(
     isSuccess,
     classes.Image,
     classes.OnFailure
   );
-
-  const history = useHistory();
 
   return (
     <div className={classes.Outcome}>
@@ -50,14 +46,10 @@ export const Outcome = connect(mapStateToProps)((props) => {
       <Button
         bName="Return button"
         bValue="Return to the initial window"
-        clickHandler={() => history.replace('/')}
+        clickHandler={() => history.push('/')}
       >
         Take me back
       </Button>
     </div>
   );
 });
-
-Outcome.propTypes = {
-  isSuccess: PropTypes.bool.isRequired,
-};

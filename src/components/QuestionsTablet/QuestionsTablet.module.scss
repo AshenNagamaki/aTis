@@ -1,7 +1,5 @@
 @import '../../utilities/utilities.scss';
 
-$arrow-size: 1.5rem;
-
 .QuestionsWrapper {
   display: flex;
   flex-flow: column;
@@ -41,9 +39,6 @@ $arrow-size: 1.5rem;
     align-self: flex-end;
     margin: 0;
     padding: 1.5rem;
-    .BackToTopArrow {
-      @include arrow($arrow-size, -135deg);
-    }
   }
   .ReturnWrapper {
     position: absolute;
@@ -52,11 +47,5 @@ $arrow-size: 1.5rem;
     align-self: flex-start;
     margin: 0;
     padding: 1.5rem;
-    .ReturnArrow {
-      @include arrow($arrow-size, 135deg);
-    }
-  }
-  .Loading {
-    margin: 0 0 40rem;
   }
 }

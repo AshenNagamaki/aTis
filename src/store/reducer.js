@@ -52,6 +52,9 @@ export const reducer = (state = initialState, action) => {
         },
       };
 
+    case actionTypes.CLEAR_STATE:
+      return initialState;
+
     default:
       return state;
   }
