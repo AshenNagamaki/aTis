@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import { App } from './App';
 import { reducer } from './store/reducer';
+import * as serviceWorker from './serviceWorker';
 
 import './index.scss';
 
@@ -26,3 +27,5 @@ ReactDOM.render(
 if (module.hot) {
   module.hot.accept();
 }
+
+serviceWorker.register();
