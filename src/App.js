@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
 
 export const App = connect(mapStateToProps)(({ reqResp }) => (
   <Switch>
-    <Route exact sensitive path="/outcome" component={Outcome}>
+    <Route exact sensitive path="/outcome">
       {objectKeysLength(reqResp) > 1 ? (
         <Outcome />
       ) : (

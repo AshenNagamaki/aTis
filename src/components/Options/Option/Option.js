@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -23,37 +23,39 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export const Option = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(({ qNum, oNum, option, answersState, isLoading, onAddAnswer }) => {
-  const literalOpt = String.fromCharCode(65 + oNum);
+export const Option = memo(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(({ qNum, oNum, option, answersState, isLoading, onAddAnswer }) => {
+    const literalOpt = String.fromCharCode(65 + oNum);
 
-  const activeClasses = activeClassElector(
-    answersState[qNum] !== literalOpt,
-    classes.Option,
-    classes.Active
-  );
+    const activeClasses = activeClassElector(
+      answersState[qNum] !== literalOpt,
+      classes.Option,
+      classes.Active
+    );
 
-  return (
-    <li
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-      role="button"
-      className={activeClasses}
-      onClick={() => {
-        // eslint-disable-next-line no-unused-expressions
-        !isLoading && onAddAnswer(qNum, literalOpt);
-      }}
-      onKeyDown={
-        (event) => handleKeyDownCreator(event, onAddAnswer(qNum, literalOpt))
-        // eslint-disable-next-line react/jsx-curly-newline
-      }
-    >
-      {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-      {literalOpt} {option}
-    </li>
-  );
-});
+    return (
+      <li
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+        role="button"
+        className={activeClasses}
+        onClick={() => {
+          // eslint-disable-next-line no-unused-expressions
+          !isLoading && onAddAnswer(qNum, literalOpt);
+        }}
+        onKeyDown={
+          (event) => handleKeyDownCreator(event, onAddAnswer(qNum, literalOpt))
+          // eslint-disable-next-line react/jsx-curly-newline
+        }
+      >
+        {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+        {literalOpt} {option}
+      </li>
+    );
+  })
+);
 
 Option.propTypes = {
   qNum: PropTypes.number.isRequired,

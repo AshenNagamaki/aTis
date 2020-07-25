@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -90,7 +90,7 @@ export const Autocomplete = connect(
   let optionList;
 
   if (userInput && showOptions) {
-    if (filteredOptions.length) {
+    if (filteredOptions.length !== 0) {
       optionList = (
         <ul className={classes.Options}>
           {filteredOptions.map((option, index) => (
@@ -127,9 +127,13 @@ export const Autocomplete = connect(
     />
   );
 
-  const classNameInUse = `${classes.InputField} ${
-    (!isActive ? active : active || userInput) && classes.Active
-  } ${!isActive && !active && classes.Inactive}`;
+  const classNameInUse = useMemo(
+    () =>
+      `${classes.InputField} ${
+        (!isActive ? active : active || userInput) && classes.Active
+      } ${!isActive && !active && classes.Inactive}`,
+    [isActive, userInput, active]
+  );
 
   return (
     <>

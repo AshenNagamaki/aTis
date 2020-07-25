@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { connect } from 'react-redux';
 
 import { requestCreator } from '../../store/actionCreators';
@@ -19,25 +19,27 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export const Main = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(({ opts, isLoading, onGetTopicsCreator }) => {
-  useEffect(() => {
-    onGetTopicsCreator();
-  }, [onGetTopicsCreator]);
+export const Main = memo(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(({ opts, isLoading, onGetTopicsCreator }) => {
+    useEffect(() => {
+      onGetTopicsCreator();
+    }, [onGetTopicsCreator]);
 
-  return (
-    <main className={classes.Main}>
-      <h1 className={classes.Title}>
-        {isLoading ? 'Wait a second ...' : 'Just start typing ...'}
-      </h1>
-      {!isLoading && (
-        <Autocomplete
-          label="Anonymous Testing Intelligent Service"
-          options={opts}
-        />
-      )}
-    </main>
-  );
-});
+    return (
+      <main className={classes.Main}>
+        <h1 className={classes.Title}>
+          {isLoading ? 'Wait a second ...' : 'Just start typing ...'}
+        </h1>
+        {!isLoading && (
+          <Autocomplete
+            label="Anonymous Testing Intelligent Service"
+            options={opts}
+          />
+        )}
+      </main>
+    );
+  })
+);

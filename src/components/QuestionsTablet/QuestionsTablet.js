@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
@@ -43,8 +43,6 @@ export const QuestionsTablet = connect(
   }) => {
     const [isScrollVisible, setIsScrollVisible] = useState(false);
 
-    const isMountedRef = useRef(null);
-
     const { topic, author, questions, options } = testData;
 
     const returnOnClickHandler = () => {
@@ -54,16 +52,14 @@ export const QuestionsTablet = connect(
 
     const toggleScrollVisibility = () => {
       // eslint-disable-next-line no-unused-expressions
-      isMountedRef.current && window.pageYOffset > 325
+      window.pageYOffset > 325
         ? setIsScrollVisible(true)
         : setIsScrollVisible(false);
     };
 
     useEffect(() => {
-      isMountedRef.current = true;
       document.addEventListener('scroll', toggleScrollVisibility);
       return () => {
-        isMountedRef.current = false;
         window.removeEventListener('scroll', toggleScrollVisibility);
       };
     }, []);
@@ -74,11 +70,14 @@ export const QuestionsTablet = connect(
       }
     }, [reqResp, history]);
 
-    const isOnSubmit =
-      questions &&
-      questions.length &&
-      JSON.parse(JSON.stringify(answ)).filter((el) => el).length ===
-        questions.length;
+    const isOnSubmit = useMemo(
+      () =>
+        questions &&
+        questions.length !== 0 &&
+        JSON.parse(JSON.stringify(answ)).filter((el) => el).length ===
+          questions.length,
+      [questions, answ]
+    );
 
     const returnButton = (
       <ControlButton
@@ -102,7 +101,7 @@ export const QuestionsTablet = connect(
 
     const questionsData =
       questions &&
-      questions.length &&
+      questions.length !== 0 &&
       questions.map((question, index) => (
         <Question
           key={`${question}`}
@@ -147,7 +146,7 @@ export const QuestionsTablet = connect(
       </section>
     );
 
-    return isLoading || objectKeysLength(testData) ? (
+    return isLoading || objectKeysLength(testData) > 1 ? (
       questionsTablet
     ) : (
       <Redirect exact strict sensitive from="/test" to="/" />

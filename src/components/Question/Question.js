@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import { Options } from '../Options/Options';
 
 import classes from './Question.module.scss';
 
-export const Question = ({ qNum, question, options }) => (
+export const Question = memo(({ qNum, question, options }) => (
   <li className={classes.Question}>
     <p className={classes.QuestionText}>
       {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
@@ -14,7 +14,7 @@ export const Question = ({ qNum, question, options }) => (
     <p className={classes.AnswerTitle}>Answer</p>
     <Options qNum={qNum} options={options} />
   </li>
-);
+));
 
 Question.propTypes = {
   qNum: PropTypes.number.isRequired,
