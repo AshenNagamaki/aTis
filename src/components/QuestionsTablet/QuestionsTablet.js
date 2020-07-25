@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 
@@ -42,6 +42,8 @@ export const QuestionsTablet = connect(
   }) => {
     const [isScrollVisible, setIsScrollVisible] = useState(false);
 
+    const isMountedRef = useRef(null);
+
     const { topic, author, questions, options } = testData;
 
     const returnOnClickHandler = () => {
@@ -51,14 +53,18 @@ export const QuestionsTablet = connect(
 
     const toggleScrollVisibility = () => {
       // eslint-disable-next-line no-unused-expressions
-      window.pageYOffset > 325
+      isMountedRef.current && window.pageYOffset > 325
         ? setIsScrollVisible(true)
         : setIsScrollVisible(false);
     };
 
     useEffect(() => {
+      isMountedRef.current = true;
       document.addEventListener('scroll', toggleScrollVisibility);
-      return () => window.removeEventListener('scroll', toggleScrollVisibility);
+      return () => {
+        isMountedRef.current = false;
+        window.removeEventListener('scroll', toggleScrollVisibility);
+      };
     }, []);
 
     useEffect(() => {
