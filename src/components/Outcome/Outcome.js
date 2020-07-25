@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { Button } from '../UI/Button/Button';
 import { activeClassElector } from '../../utilities/utilities';
@@ -13,7 +14,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export const Outcome = connect(mapStateToProps)(({ reqResp, history }) => {
+export const Outcome = connect(mapStateToProps)(({ reqResp }) => {
+  const history = useHistory();
+
   const isSuccess = reqResp && !reqResp.reqFailed;
 
   const activeClass = activeClassElector(

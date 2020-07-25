@@ -57,6 +57,11 @@ export const Autocomplete = connect(
     });
   };
 
+  const getTestOnClickHandler = () => {
+    onGetTestCreator(completion.userInput);
+    history.push('/test');
+  };
+
   const changeOptionHandler = (nextOption) => {
     setCompletion((prevState) => ({ ...prevState, activeOption: nextOption }));
   };
@@ -112,11 +117,6 @@ export const Autocomplete = connect(
       );
     }
   }
-
-  const getTestOnClickHandler = () => {
-    onGetTestCreator(completion.userInput);
-    history.push('/test');
-  };
 
   const continueButton = (
     <ControlButton

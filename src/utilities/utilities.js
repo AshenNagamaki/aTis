@@ -13,3 +13,5 @@ export const activeClassElector = (elector, mainClass, secondClass) =>
 
 export const parseError = (err) =>
   JSON.parse(JSON.stringify(err, Object.getOwnPropertyNames(err)));
+
+export const objectKeysLength = (obj) => Object.keys(obj).length;

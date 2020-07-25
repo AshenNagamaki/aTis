@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 
 import { Question } from '../Question/Question';
 import { Button } from '../UI/Button/Button';
 import { ControlButton } from '../UI/ControlButton/ControlButton';
 import { clearStateCreator, requestCreator } from '../../store/actionCreators';
-import { scrollToTop } from '../../utilities/utilities';
+import { scrollToTop, objectKeysLength } from '../../utilities/utilities';
 
 import classes from './QuestionsTablet.module.scss';
 
@@ -68,7 +69,7 @@ export const QuestionsTablet = connect(
     }, []);
 
     useEffect(() => {
-      if (Object.keys(reqResp).length > 1) {
+      if (objectKeysLength(reqResp) > 1) {
         history.push('/outcome');
       }
     }, [reqResp, history]);
@@ -146,6 +147,10 @@ export const QuestionsTablet = connect(
       </section>
     );
 
-    return questionsTablet;
+    return isLoading || objectKeysLength(testData) ? (
+      questionsTablet
+    ) : (
+      <Redirect exact strict sensitive from="/test" to="/" />
+    );
   }
 );
