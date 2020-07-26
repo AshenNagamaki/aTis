@@ -33,12 +33,11 @@ export const Main = memo(
         <h1 className={classes.Title}>
           {isLoading ? 'Wait a second ...' : 'Just start typing ...'}
         </h1>
-        {!isLoading && (
-          <Autocomplete
-            label="Anonymous Testing Intelligent Service"
-            options={opts}
-          />
-        )}
+        <Autocomplete
+          label="Anonymous Testing Intelligent Service"
+          options={opts}
+          isActive={!isLoading}
+        />
       </main>
     );
   })

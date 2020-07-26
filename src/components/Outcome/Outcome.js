@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { Button } from '../UI/Button/Button';
 import { activeClassElector } from '../../utilities/utilities';
@@ -27,10 +29,13 @@ export const Outcome = connect(mapStateToProps)(({ reqResp }) => {
 
   return (
     <div className={classes.Outcome}>
-      <img
+      <LazyLoadImage
         className={activeClass}
         src={outcomeImage}
         alt={isSuccess ? 'Successfully completed' : 'Something went wrong'}
+        delayMethod="debounce"
+        effect="blur"
+        placeholderSrc={outcomeImage}
       />
       <h1 className={classes.Title}>
         {isSuccess ? 'Success!' : 'What the ...?'}

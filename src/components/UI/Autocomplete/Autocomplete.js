@@ -104,7 +104,7 @@ export const Autocomplete = connect(
                 // eslint-disable-next-line react/jsx-curly-newline
               }
             >
-              {option}
+              {`„${option}“`}
             </li>
           ))}
         </ul>
@@ -143,7 +143,7 @@ export const Autocomplete = connect(
           type="text"
           name="Autocomplete input field"
           value={userInput}
-          placeholder={label}
+          placeholder={isActive ? label : null}
           onChange={changeHandler}
           onKeyDown={keyDownHandler}
           onFocus={() => isActive && setActive(true)}
@@ -151,7 +151,7 @@ export const Autocomplete = connect(
           disabled={!isActive}
           autoComplete="off"
         />
-        <label htmlFor="autocomplete">{label}</label>
+        <label htmlFor="autocomplete">{isActive && label}</label>
         {isActive && userInput && options.includes(userInput) && continueButton}
       </div>
       {optionList}

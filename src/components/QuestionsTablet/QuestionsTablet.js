@@ -97,7 +97,15 @@ export const QuestionsTablet = connect(
       />
     );
 
-    const loader = <Loader type="Audio" visible={isLoading} color="#f7f7f7" />;
+    const loader = (
+      <Loader
+        type="Bars"
+        width={60}
+        height={60}
+        color="#f7f7f7"
+        visible={isLoading}
+      />
+    );
 
     const questionsData =
       questions &&

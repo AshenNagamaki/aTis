@@ -57,6 +57,7 @@ $transition-default: 0.33s background-color ease-in-out,
     }
   }
   &.Inactive {
+    filter: blur(1rem);
     pointer-events: none;
   }
   input {
