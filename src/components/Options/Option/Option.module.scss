@@ -15,6 +15,12 @@
   color: $general-text-color;
   cursor: pointer;
   transition: background-color 0.125s ease-in-out, transform 0.15s;
+  @include for-mobile-portrait {
+    width: 17.5rem;
+  }
+  @include for-mobile-landscape {
+    width: 27.5rem;
+  }
   &.Active {
     transform: translate(1.5rem);
     @include color-change-animation;

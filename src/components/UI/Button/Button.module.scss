@@ -13,6 +13,9 @@
   color: $general-text-color;
   cursor: pointer;
   transition: 0.25s ease-in-out;
+  @include for-mobile-portrait {
+    width: 27.5rem;
+  }
   &:hover:enabled {
     width: 30rem;
     border-radius: 5rem;

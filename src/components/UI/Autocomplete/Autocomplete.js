@@ -72,7 +72,7 @@ export const Autocomplete = connect(
         ...prevState,
         activeOption: 0,
         showOptions: false,
-        userInput: filteredOptions[activeOption],
+        userInput: filteredOptions[activeOption] || prevState.userInput,
       }));
     } else if (e.keyCode === 38) {
       // eslint-disable-next-line no-unused-expressions
@@ -104,7 +104,7 @@ export const Autocomplete = connect(
                 // eslint-disable-next-line react/jsx-curly-newline
               }
             >
-              {`„${option}“`}
+              {option}
             </li>
           ))}
         </ul>

@@ -11,5 +11,8 @@
     margin: 37.5rem 0 5rem;
     font-size: 275%;
     color: $general-background-color;
+    @include for-mobile-portrait {
+      font-size: 225%;
+    }
   }
 }

@@ -9,8 +9,11 @@ $font-size-default: 112.5%;
 $transition-default: 0.33s background-color ease-in-out,
   0.33s box-shadow ease-in-out;
 
-@mixin input-placeholder-color {
+@mixin input-placeholder {
   color: transparentize($general-background-color, 0.2);
+  @include for-mobile-portrait {
+    font-size: 82.5%;
+  }
 }
 
 @mixin background-color-transparentize($amount) {
@@ -34,14 +37,38 @@ $transition-default: 0.33s background-color ease-in-out,
   @include box-shadow-transparentize($amountForShadow);
 }
 
+@mixin width-scale-media {
+  @include for-mobile-portrait {
+    width: $width-default * 2.9;
+  }
+  @include for-mobile-landscape {
+    width: $width-default * 2.75;
+  }
+  @include for-tablet-portrait {
+    width: $width-default * 2.15;
+  }
+  @include for-tablet-landscape {
+    width: $width-default * 1.75;
+  }
+  @include for-laptop-and-desktop {
+    width: $width-default * 1.35;
+  }
+  @include for-large-laptop-and-desktop {
+    width: $width-default;
+  }
+  @include for-extra-large-device {
+    width: $width-default * 0.9;
+  }
+}
+
 .InputField {
   position: relative;
-  width: $width-default;
   height: $height-default;
   border-radius: $border-radius-default;
   font-family: sans-serif;
   transition: $transition-default;
   @include background-color-transparentize(0.66);
+  @include width-scale-media;
   &:hover {
     @include background-shadow-transparentize(0.5, 0.05);
   }
@@ -76,16 +103,16 @@ $transition-default: 0.33s background-color ease-in-out,
     transition: $transition-default, 0.1s padding ease-in-out;
     -webkit-appearance: none;
     &::-moz-placeholder {
-      @include input-placeholder-color;
+      @include input-placeholder;
     }
     &::-webkit-input-placeholder {
-      @include input-placeholder-color;
+      @include input-placeholder;
     }
     &:-moz-placeholder {
-      @include input-placeholder-color;
+      @include input-placeholder;
     }
     &:-ms-input-placeholder {
-      @include input-placeholder-color;
+      @include input-placeholder;
     }
     + label {
       position: absolute;
@@ -110,12 +137,12 @@ $transition-default: 0.33s background-color ease-in-out,
 }
 
 ul.Options {
-  width: $width-default;
   margin: 0;
   padding: 0;
   box-shadow: $general-box-shadow;
   list-style-type: none;
   transition: width 0.33s;
+  @include width-scale-media;
   li {
     padding: 1.85rem;
     background-color: $general-background-color;
@@ -138,10 +165,10 @@ ul.Options {
 }
 
 .NoShow {
-  width: $width-default;
   margin: 1rem;
   padding: 0;
   font-size: 105%;
   color: $general-background-color;
   opacity: 0.75;
+  @include width-scale-media;
 }

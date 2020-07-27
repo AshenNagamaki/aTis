@@ -7,6 +7,19 @@
   border-radius: 0.5rem;
   background-color: $general-background-color;
   box-shadow: $general-box-shadow;
+  @include for-mobile-portrait {
+    width: 20rem;
+    margin: 3rem 0;
+    padding: 3rem 5rem 3.5rem 2.5rem;
+  }
+  @include for-mobile-landscape {
+    width: 32rem;
+    margin: 3rem;
+  }
+  @include for-tablet-portrait {
+    width: 85%;
+    margin: 3.5rem 0;
+  }
   .QuestionText {
     margin: 0 0 2.5rem 2rem;
     font-size: 110%;

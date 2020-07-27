@@ -14,6 +14,9 @@
     padding: 0;
     font-size: 195%;
     color: $general-background-color;
+    @include for-mobile-portrait {
+      font-size: 150%;
+    }
   }
   .Author {
     margin: 1.5rem 0 0;
@@ -39,6 +42,18 @@
     align-self: flex-end;
     margin: 0;
     padding: 1.5rem;
+    @include for-mobile-portrait {
+      display: none;
+    }
+    @include for-mobile-landscape {
+      display: none;
+    }
+    @include for-tablet-portrait {
+      display: none;
+    }
+    @include for-tablet-landscape {
+      display: none;
+    }
   }
   .ReturnWrapper {
     position: absolute;
@@ -47,5 +62,8 @@
     align-self: flex-start;
     margin: 0;
     padding: 1.5rem;
+    @include for-mobile-portrait {
+      top: 7.5%;
+    }
   }
 }

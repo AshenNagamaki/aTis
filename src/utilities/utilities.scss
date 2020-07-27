@@ -6,6 +6,14 @@ $general-box-shadow: 0 0.28rem 0.22rem rgba(0, 0, 0, 0.034),
   0 2.23rem 1.79rem rgba(0, 0, 0, 0.072), 0 4.18rem 3.34rem rgba(0, 0, 0, 0.086),
   0 10rem 8rem rgba(0, 0, 0, 0.12);
 
+$viewport-3: 320px;
+$viewport-4: 480px;
+$viewport-7: 768px;
+$viewport-9: 992px;
+$viewport-12: 1200px;
+$viewport-18: 1800px;
+$viewport-20: 2000px;
+
 @mixin rotate($angle) {
   transform: rotate($angle);
   -moz-transform: rotate($angle);
@@ -39,5 +47,47 @@ $general-box-shadow: 0 0.28rem 0.22rem rgba(0, 0, 0, 0.034),
   }
   &:hover {
     transform: scale(1.1);
+  }
+}
+
+@mixin for-mobile-portrait {
+  @media only screen and (min-width: $viewport-3) and (max-width: $viewport-4 - 1) {
+    @content;
+  }
+}
+
+@mixin for-mobile-landscape {
+  @media only screen and (min-width: $viewport-4) and (max-width: $viewport-7 - 1) {
+    @content;
+  }
+}
+
+@mixin for-tablet-portrait {
+  @media only screen and (min-width: $viewport-7) and (max-width: $viewport-9 - 1) {
+    @content;
+  }
+}
+
+@mixin for-tablet-landscape {
+  @media only screen and (min-width: $viewport-9) and (max-width: $viewport-12 - 1) {
+    @content;
+  }
+}
+
+@mixin for-laptop-and-desktop {
+  @media only screen and (min-width: $viewport-12) and (max-width: $viewport-18 - 1) {
+    @content;
+  }
+}
+
+@mixin for-large-laptop-and-desktop {
+  @media only screen and (min-width: $viewport-18) {
+    @content;
+  }
+}
+
+@mixin for-extra-large-device {
+  @media only screen and (min-width: $viewport-20) {
+    @content;
   }
 }

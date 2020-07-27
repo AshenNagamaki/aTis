@@ -1,5 +1,16 @@
 @import '../../utilities/utilities.scss';
 
+@mixin text-align-for-mobile {
+  @include for-mobile-portrait {
+    width: 30rem;
+    text-align: center;
+  }
+  @include for-mobile-landscape {
+    width: 45rem;
+    text-align: center;
+  }
+}
+
 .Outcome {
   display: flex;
   position: absolute;
@@ -29,11 +40,13 @@
     margin: 4.75rem 0 0;
     padding: 0;
     font-size: 175%;
+    @include text-align-for-mobile;
   }
   .Text {
     margin: 1.25rem 0 6.75rem;
     padding: 0;
     font-size: 120%;
     opacity: 0.65;
+    @include text-align-for-mobile;
   }
 }
