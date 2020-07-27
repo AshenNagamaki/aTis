@@ -52,9 +52,7 @@ export const QuestionsTablet = connect(
 
     const toggleScrollVisibility = () => {
       // eslint-disable-next-line no-unused-expressions
-      window.pageYOffset > 325
-        ? setIsScrollVisible(true)
-        : setIsScrollVisible(false);
+      window.pageYOffset > 325 ? setIsScrollVisible(true) : setIsScrollVisible(false);
     };
 
     useEffect(() => {
@@ -74,8 +72,7 @@ export const QuestionsTablet = connect(
       () =>
         questions &&
         questions.length !== 0 &&
-        JSON.parse(JSON.stringify(answ)).filter((el) => el).length ===
-          questions.length,
+        JSON.parse(JSON.stringify(answ)).filter((el) => el).length === questions.length,
       [questions, answ]
     );
 
@@ -98,13 +95,7 @@ export const QuestionsTablet = connect(
     );
 
     const loader = (
-      <Loader
-        type="Bars"
-        width={60}
-        height={60}
-        color="#f7f7f7"
-        visible={isLoading}
-      />
+      <Loader type="Bars" width={60} height={60} color="#f7f7f7" visible={isLoading} />
     );
 
     const questionsData =
@@ -127,9 +118,7 @@ export const QuestionsTablet = connect(
           isDisabled={!isOnSubmit || isLoading}
           clickHandler={() => onPostAnswerCreator(topic, answ)}
         >
-          {isOnSubmit
-            ? 'Submit answers'
-            : 'Please answer all the questions to proceed'}
+          {isOnSubmit ? 'Submit answers' : 'Please answer all the questions to proceed'}
         </Button>
         <button
           className={classes.QuestionsReturn}

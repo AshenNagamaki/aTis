@@ -18,9 +18,7 @@ export const Question = memo(({ qNum, question, options }) => (
 
 Question.propTypes = {
   qNum: PropTypes.number.isRequired,
-  question: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  question: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number]))
     .isRequired,
-  options: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  ).isRequired,
 };

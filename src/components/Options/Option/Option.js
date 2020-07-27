@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { addAnswerCreator } from '../../../store/actionCreators';
-import {
-  handleKeyDownCreator,
-  activeClassElector,
-} from '../../../utilities/utilities';
+import { handleKeyDownCreator, activeClassElector } from '../../../utilities/utilities';
 
 import classes from './Option.module.scss';
 

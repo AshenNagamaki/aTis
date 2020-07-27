@@ -36,8 +36,7 @@ export const Autocomplete = connect(
     const currentUserInput = e.currentTarget.value;
 
     const forFilteredOptions = options.filter(
-      (option) =>
-        option.toLowerCase().indexOf(currentUserInput.toLowerCase()) > -1
+      (option) => option.toLowerCase().indexOf(currentUserInput.toLowerCase()) > -1
     );
 
     setCompletion({
@@ -111,9 +110,7 @@ export const Autocomplete = connect(
       );
     } else {
       optionList = (
-        <div className={classes.NoShow}>
-          Nothing to show. You are on your own!
-        </div>
+        <div className={classes.NoShow}>Nothing to show. You are on your own!</div>
       );
     }
   }

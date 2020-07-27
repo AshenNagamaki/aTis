@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 
 import classes from './Button.module.scss';
 
-export const Button = ({
-  bName,
-  bValue,
-  isDisabled,
-  clickHandler,
-  children,
-}) => (
+export const Button = ({ bName, bValue, isDisabled, clickHandler, children }) => (
   <button
     className={classes.Button}
     type="button"

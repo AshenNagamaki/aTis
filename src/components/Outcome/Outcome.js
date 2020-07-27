@@ -21,11 +21,7 @@ export const Outcome = connect(mapStateToProps)(({ reqResp }) => {
 
   const isSuccess = reqResp && !reqResp.reqFailed;
 
-  const activeClass = activeClassElector(
-    isSuccess,
-    classes.Image,
-    classes.OnFailure
-  );
+  const activeClass = activeClassElector(isSuccess, classes.Image, classes.OnFailure);
 
   return (
     <div className={classes.Outcome}>
@@ -37,9 +33,7 @@ export const Outcome = connect(mapStateToProps)(({ reqResp }) => {
         effect="blur"
         placeholderSrc={outcomeImage}
       />
-      <h1 className={classes.Title}>
-        {isSuccess ? 'Success!' : 'What the ...?'}
-      </h1>
+      <h1 className={classes.Title}>{isSuccess ? 'Success!' : 'What the ...?'}</h1>
       <h5 className={classes.Topic}>
         {isSuccess
           ? 'Your results were successfully submitted for review!'

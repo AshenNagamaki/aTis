@@ -6,8 +6,7 @@ $arrow-padding: 1.5rem;
 $border-radius-default: 0.3rem;
 $box-shadow-default: 0 0.4rem 2rem 0;
 $font-size-default: 112.5%;
-$transition-default: 0.33s background-color ease-in-out,
-  0.33s box-shadow ease-in-out;
+$transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-in-out;
 
 @mixin input-placeholder {
   color: transparentize($general-background-color, 0.2);
@@ -29,10 +28,7 @@ $transition-default: 0.33s background-color ease-in-out,
   box-shadow: $box-shadow-default rgba(0, 0, 0, $amount);
 }
 
-@mixin background-shadow-transparentize(
-  $amoundForBackground,
-  $amountForShadow
-) {
+@mixin background-shadow-transparentize($amoundForBackground, $amountForShadow) {
   @include background-color-transparentize($amoundForBackground);
   @include box-shadow-transparentize($amountForShadow);
 }

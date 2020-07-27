@@ -1,6 +1,6 @@
 {
   "name": "atis",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "homepage": "http://AshenNagamaki.github.io/aTis",
   "private": true,
   "dependencies": {
@@ -28,6 +28,17 @@
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "./src/*.+(js|jsx)": [
+      "eslint src/*.js --fix-dry-run",
+      "yarn prettier --write"
+    ]
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -54,6 +65,8 @@
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^3.0.0",
     "gh-pages": "^3.1.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
     "prettier": "^2.0.2"
   }
 }

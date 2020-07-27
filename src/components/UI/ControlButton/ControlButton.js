@@ -5,12 +5,7 @@ import { handleKeyDownCreator } from '../../../utilities/utilities';
 
 import classes from './ControlButton.module.scss';
 
-export const ControlButton = ({
-  direction,
-  outerClass,
-  title,
-  clickHandler,
-}) => {
+export const ControlButton = ({ direction, outerClass, title, clickHandler }) => {
   let innerClass;
 
   switch (direction) {
