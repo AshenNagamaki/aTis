@@ -143,13 +143,6 @@ $transition-default: 0.33s background-color ease-in-out,
   .ContinueWrapper {
     position: absolute;
     bottom: 10%;
-
-    @include for-tablet-portrait {
-      width: $width-default * 2.15;
-    }
-    @include for-tablet-landscape {
-      width: $width-default * 1.75;
-    }
     right: -12.5%;
     margin: 0;
     padding: $arrow-padding;
