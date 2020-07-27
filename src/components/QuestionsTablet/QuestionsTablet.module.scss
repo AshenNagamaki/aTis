@@ -1,5 +1,13 @@
 @import '../../utilities/utilities.scss';
 
+@mixin padding-mobile-tablet {
+  padding: 1rem 0 3rem;
+}
+
+@mixin top-mobile {
+  top: 7.5%;
+}
+
 .QuestionsWrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -43,6 +51,18 @@
     opacity: 0.75;
     filter: none;
     cursor: pointer;
+    @include for-mobile-portrait {
+      @include padding-mobile-tablet;
+    }
+    @include for-mobile-landscape {
+      @include padding-mobile-tablet;
+    }
+    @include for-tablet-portrait {
+      @include padding-mobile-tablet;
+    }
+    @include for-tablet-landscape {
+      @include padding-mobile-tablet;
+    }
   }
   .BackToTopWrapper {
     position: -webkit-sticky;
@@ -75,7 +95,10 @@
     margin: 0;
     padding: 1.5rem;
     @include for-mobile-portrait {
-      top: 7.5%;
+      @include top-mobile;
+    }
+    @include for-mobile-landscape {
+      @include top-mobile;
     }
   }
 }

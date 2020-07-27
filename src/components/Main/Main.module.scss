@@ -1,5 +1,8 @@
 @import '../../utilities/utilities.scss';
 
+$margin-top-default: 37.5rem;
+$margin-mobile: $margin-top-default * 0.4 0 5rem;
+
 .Main {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -13,11 +16,21 @@
   width: 100%;
   height: 100%;
   .Title {
-    margin: 37.5rem 0 5rem;
+    margin: $margin-top-default 0 5rem;
     font-size: 275%;
     color: $general-background-color;
     @include for-mobile-portrait {
       font-size: 225%;
+      margin: $margin-mobile;
+    }
+    @include for-mobile-landscape {
+      margin: $margin-mobile;
+    }
+    @include for-tablet-portrait {
+      margin: $margin-top-default * 0.55 0 5rem;
+    }
+    @include for-tablet-landscape {
+      margin: $margin-top-default * 0.65 0 5rem;
     }
   }
 }
