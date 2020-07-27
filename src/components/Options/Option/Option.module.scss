@@ -14,7 +14,12 @@
   font-size: 100%;
   color: $general-text-color;
   cursor: pointer;
+  -webkit-transition: background-color 0.125s ease-in-out,
+    -webkit-transform 0.15s;
+  transition: background-color 0.125s ease-in-out, -webkit-transform 0.15s;
   transition: background-color 0.125s ease-in-out, transform 0.15s;
+  transition: background-color 0.125s ease-in-out, transform 0.15s,
+    -webkit-transform 0.15s;
   @include for-mobile-portrait {
     width: 17.5rem;
   }
@@ -22,10 +27,11 @@
     width: 27.5rem;
   }
   &.Active {
+    -webkit-transform: translate(1.5rem);
     transform: translate(1.5rem);
     @include color-change-animation;
   }
-  &::first-letter {
+  &:first-letter {
     margin-right: 0.5rem;
     font-size: 125%;
     font-weight: 700;

@@ -1,8 +1,13 @@
 @import '../../utilities/utilities.scss';
 
 .QuestionsWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-flow: column;
   flex-flow: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   .Questions {
     margin: 0;
@@ -23,7 +28,9 @@
     padding: 0;
     font-size: 125%;
     color: $general-background-color;
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=55)';
     opacity: 0.55;
+    filter: none;
   }
   .QuestionsReturn {
     margin: 0;
@@ -32,13 +39,17 @@
     background-color: inherit;
     text-decoration: underline;
     color: $general-background-color;
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=75)';
     opacity: 0.75;
+    filter: none;
     cursor: pointer;
   }
   .BackToTopWrapper {
+    position: -webkit-sticky;
     position: sticky;
     bottom: 5%;
     right: 5%;
+    -ms-flex-item-align: end;
     align-self: flex-end;
     margin: 0;
     padding: 1.5rem;
@@ -59,6 +70,7 @@
     position: absolute;
     top: 2.5%;
     left: 1%;
+    -ms-flex-item-align: start;
     align-self: flex-start;
     margin: 0;
     padding: 1.5rem;

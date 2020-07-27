@@ -27,6 +27,8 @@
   .AnswerTitle {
     margin: 0 0 1rem 2rem;
     font-size: 150%;
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=50)';
     opacity: 0.5;
+    filter: none;
   }
 }

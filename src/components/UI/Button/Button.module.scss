@@ -12,6 +12,7 @@
   font-size: 110%;
   color: $general-text-color;
   cursor: pointer;
+  -webkit-transition: 0.25s ease-in-out;
   transition: 0.25s ease-in-out;
   @include for-mobile-portrait {
     width: 27.5rem;
@@ -25,7 +26,9 @@
   }
   &[disabled],
   &:disabled {
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=25)';
     opacity: 0.25;
+    filter: none;
     cursor: default;
   }
 }

@@ -30,8 +30,11 @@ $viewport-20: 2000px;
   position: relative;
   width: $arrowSize;
   height: $arrowSize;
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  transition: -webkit-transform 0.2s ease-in-out;
   transition: transform 0.2s ease-in-out;
-  &::after {
+  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+  &:after {
     display: inline-block;
     position: absolute;
     top: 0;
@@ -46,6 +49,7 @@ $viewport-20: 2000px;
     @include rotate($arrowDeg);
   }
   &:hover {
+    -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
 }
