@@ -47,7 +47,7 @@ export const QuestionsTablet = connect(
 
     const returnOnClickHandler = () => {
       onClearStateCreator();
-      history.push('/');
+      history.push('/aTis');
     };
 
     const toggleScrollVisibility = () => {
@@ -66,7 +66,7 @@ export const QuestionsTablet = connect(
 
     useEffect(() => {
       if (objectKeysLength(reqResp) > 1) {
-        history.push('/outcome');
+        history.push('/aTis/outcome');
       }
     }, [reqResp, history]);
 
@@ -157,7 +157,7 @@ export const QuestionsTablet = connect(
     return isLoading || objectKeysLength(testData) > 1 ? (
       questionsTablet
     ) : (
-      <Redirect exact strict sensitive from="/test" to="/" />
+      <Redirect exact strict sensitive from="/aTis/test" to="/aTis" />
     );
   }
 );

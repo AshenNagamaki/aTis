@@ -59,7 +59,7 @@ export const Autocomplete = connect(
 
   const getTestOnClickHandler = () => {
     onGetTestCreator(completion.userInput);
-    history.push('/test');
+    history.push('/aTis/test');
   };
 
   const changeOptionHandler = (nextOption) => {

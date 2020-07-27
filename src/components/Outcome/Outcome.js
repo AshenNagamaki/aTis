@@ -54,7 +54,7 @@ export const Outcome = connect(mapStateToProps)(({ reqResp }) => {
       <Button
         bName="Return button"
         bValue="Return to the initial window"
-        clickHandler={() => history.push('/')}
+        clickHandler={() => history.push('/aTis')}
       >
         Take me back
       </Button>
