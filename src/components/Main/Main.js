@@ -29,8 +29,8 @@ export const Main = memo(
     }, [onGetTopicsCreator]);
 
     return (
-      <main className={classes.Main}>
-        <h1 className={classes.Title}>
+      <main className={classes.main}>
+        <h1 className={classes.title}>
           {isLoading ? 'Wait a second ...' : 'Just start typing ...'}
         </h1>
         <Autocomplete
@@ -38,7 +38,7 @@ export const Main = memo(
           options={opts}
           isActive={!isLoading}
         />
-        <footer className={classes.Footer}>
+        <footer className={classes.footer}>
           {`v${process.env.REACT_APP_VERSION}`}
           <a
             href={process.env.REACT_APP_AUTHOR_URL}

@@ -10,16 +10,16 @@ export const ControlButton = ({ direction, outerClass, title, clickHandler }) =>
 
   switch (direction) {
     case 'top':
-      innerClass = classes.ArrowTop;
+      innerClass = classes.arrowTop;
       break;
     case 'right':
-      innerClass = classes.ArrowRight;
+      innerClass = classes.arrowRight;
       break;
     case 'bottom':
-      innerClass = classes.ArrowBottom;
+      innerClass = classes.arrowBottom;
       break;
     case 'left':
-      innerClass = classes.ArrowLeft;
+      innerClass = classes.arrowLeft;
       break;
     default:
       break;

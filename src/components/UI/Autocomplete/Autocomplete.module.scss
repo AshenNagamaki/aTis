@@ -62,7 +62,7 @@ $transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-i
   filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="16" /></filter></svg>#filter');
 }
 
-.InputField {
+.inputField {
   position: relative;
   height: $height-default;
   border-radius: $border-radius-default;
@@ -74,7 +74,7 @@ $transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-i
   &:hover {
     @include background-shadow-transparentize(0.5, 0.05);
   }
-  &.Active {
+  &.active {
     @include background-shadow-transparentize(0, 0.2);
     input {
       padding: 1rem 0 0 1.6rem;
@@ -87,7 +87,7 @@ $transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-i
       }
     }
   }
-  &.Inactive {
+  &.inactive {
     @include filter-w3-default;
     -webkit-filter: blur(1rem);
     filter: blur(1rem);
@@ -137,7 +137,7 @@ $transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-i
       pointer-events: none;
     }
   }
-  .ContinueWrapper {
+  .continueWrapper {
     position: absolute;
     bottom: 10%;
     right: -12.5%;
@@ -146,7 +146,7 @@ $transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-i
   }
 }
 
-ul.Options {
+ul.options {
   margin: 0;
   padding: 0;
   box-shadow: $general-box-shadow;
@@ -169,13 +169,13 @@ ul.Options {
       cursor: pointer;
       @include target-option-color-scheme;
     }
-    &.Active {
+    &.optionActive {
       @include target-option-color-scheme;
     }
   }
 }
 
-.NoShow {
+.noShow {
   margin: 1rem;
   padding: 0;
   font-size: 105%;

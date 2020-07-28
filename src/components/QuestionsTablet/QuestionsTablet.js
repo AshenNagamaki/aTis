@@ -79,7 +79,7 @@ export const QuestionsTablet = connect(
     const returnButton = (
       <ControlButton
         direction="left"
-        outerClass={classes.ReturnWrapper}
+        outerClass={classes.returnWrapper}
         title="Return to the initial window"
         clickHandler={returnOnClickHandler}
       />
@@ -88,7 +88,7 @@ export const QuestionsTablet = connect(
     const scrollToTopButton = (
       <ControlButton
         direction="top"
-        outerClass={classes.BackToTopWrapper}
+        outerClass={classes.backToTopWrapper}
         title="Back to top"
         clickHandler={scrollToTop}
       />
@@ -122,7 +122,7 @@ export const QuestionsTablet = connect(
           {isOnSubmit ? 'Submit answers' : 'Please answer all the questions to proceed'}
         </Button>
         <button
-          className={classes.QuestionsReturn}
+          className={classes.questionsReturn}
           type="button"
           name="Return button"
           value="OR return to the initial window"
@@ -134,11 +134,11 @@ export const QuestionsTablet = connect(
     );
 
     const questionsTablet = (
-      <section className={classes.QuestionsWrapper}>
-        <h1 className={classes.Title}>{topic}</h1>
-        <h3 className={classes.Author}>{author && `by ${author}`}</h3>
+      <section className={classes.questionsWrapper}>
+        <h1 className={classes.title}>{topic}</h1>
+        <h3 className={classes.author}>{author && `by ${author}`}</h3>
         {!isLoading && returnButton}
-        <ul className={classes.Questions}>{questionsData}</ul>
+        <ul className={classes.questions}>{questionsData}</ul>
         {isLoading ? loader : submitInterface}
         {isScrollVisible && scrollToTopButton}
       </section>

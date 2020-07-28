@@ -29,8 +29,8 @@ export const Option = memo(
 
     const activeClasses = activeClassElector(
       answersState[qNum] !== literalOpt,
-      classes.Option,
-      classes.Active
+      classes.option,
+      classes.active
     );
 
     return (

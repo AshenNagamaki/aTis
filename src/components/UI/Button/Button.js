@@ -5,7 +5,7 @@ import classes from './Button.module.scss';
 
 export const Button = ({ bName, bValue, isDisabled, clickHandler, children }) => (
   <button
-    className={classes.Button}
+    className={classes.button}
     type="button"
     name={bName}
     value={bValue}

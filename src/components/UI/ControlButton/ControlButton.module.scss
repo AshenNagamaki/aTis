@@ -6,18 +6,18 @@ $arrow-size: 1.5rem;
   @include arrow($arrow-size, $angle);
 }
 
-.ArrowTop {
+.arrowTop {
   @include generateArrow(-135deg);
 }
 
-.ArrowRight {
+.arrowRight {
   @include generateArrow(-45deg);
 }
 
-.ArrowBottom {
+.arrowBottom {
   @include generateArrow(45deg);
 }
 
-.ArrowLeft {
+.arrowLeft {
   @include generateArrow(135deg);
 }

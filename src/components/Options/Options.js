@@ -10,7 +10,7 @@ export const Options = memo(({ qNum, options }) => {
     <Option key={option} qNum={qNum} oNum={index} option={option} />
   ));
 
-  return <ol className={classes.Options}>{optionsData}</ol>;
+  return <ol className={classes.options}>{optionsData}</ol>;
 });
 
 Options.propTypes = {

@@ -91,11 +91,11 @@ export const Autocomplete = connect(
   if (userInput && showOptions) {
     if (filteredOptions.length !== 0) {
       optionList = (
-        <ul className={classes.Options}>
+        <ul className={classes.options}>
           {filteredOptions.map((option, index) => (
             <li
               role="menuitem"
-              className={index === activeOption ? classes.Active : undefined}
+              className={index === activeOption ? classes.optionActive : undefined}
               key={option}
               onClick={clickHandler}
               onKeyDown={
@@ -110,7 +110,7 @@ export const Autocomplete = connect(
       );
     } else {
       optionList = (
-        <div className={classes.NoShow}>Nothing to show. You are on your own!</div>
+        <div className={classes.noShow}>Nothing to show. You are on your own!</div>
       );
     }
   }
@@ -118,7 +118,7 @@ export const Autocomplete = connect(
   const continueButton = (
     <ControlButton
       direction="right"
-      outerClass={classes.ContinueWrapper}
+      outerClass={classes.continueWrapper}
       title="Continue to the test"
       clickHandler={getTestOnClickHandler}
     />
@@ -126,9 +126,9 @@ export const Autocomplete = connect(
 
   const classNameInUse = useMemo(
     () =>
-      `${classes.InputField} ${
-        (!isActive ? active : active || userInput) && classes.Active
-      } ${!isActive && !active && classes.Inactive}`,
+      `${classes.inputField} ${
+        (!isActive ? active : active || userInput) && classes.active
+      } ${!isActive && !active && classes.inactive}`,
     [isActive, userInput, active]
   );
 

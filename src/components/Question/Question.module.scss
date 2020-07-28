@@ -1,8 +1,8 @@
 @import '../../utilities/utilities.scss';
 
-$indicator-dimension: 1rem;
+$indicator-dimension: 0.8rem;
 
-.Question {
+.question {
   width: 75rem;
   margin: 3.5rem;
   padding: 5rem;
@@ -22,7 +22,7 @@ $indicator-dimension: 1rem;
     width: 85%;
     margin: 3.5rem 0;
   }
-  .Indicator {
+  .indicator {
     display: inline-block;
     position: relative;
     right: 2.5%;
@@ -30,15 +30,15 @@ $indicator-dimension: 1rem;
     height: $indicator-dimension;
     border-radius: 50%;
     @include main-theme-on-device-media('background-color');
-    &.Hidden {
+    &.inactive {
       visibility: hidden;
     }
   }
-  .QuestionText {
+  .questionText {
     margin: 0 0 2.5rem 2rem;
     font-size: 110%;
   }
-  .AnswerTitle {
+  .answerTitle {
     margin: 0 0 1rem 2rem;
     font-size: 150%;
     -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=50)';

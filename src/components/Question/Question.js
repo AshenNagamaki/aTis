@@ -7,15 +7,15 @@ import { activeClassElector } from '../../utilities/utilities';
 import classes from './Question.module.scss';
 
 export const Question = memo(({ qNum, question, options, answers }) => (
-  <li className={classes.Question}>
+  <li className={classes.question}>
     <span
-      className={activeClassElector(!answers[qNum], classes.Indicator, classes.Hidden)}
+      className={activeClassElector(!answers[qNum], classes.indicator, classes.inactive)}
     />
-    <p className={classes.QuestionText}>
+    <p className={classes.questionText}>
       {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
       {qNum + 1}. {question}
     </p>
-    <p className={classes.AnswerTitle}>Answer</p>
+    <p className={classes.answerTitle}>Answer</p>
     <Options qNum={qNum} options={options} />
   </li>
 ));
