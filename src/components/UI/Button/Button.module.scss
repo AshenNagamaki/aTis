@@ -22,7 +22,7 @@
     border-radius: 5rem;
     background-color: $general-background-color;
     font-size: 115%;
-    @include main-color-on-device-media(color);
+    @include main-theme-on-device-media('color');
   }
   &[disabled],
   &:disabled {

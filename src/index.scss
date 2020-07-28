@@ -10,6 +10,6 @@ html {
     font-size: 1.4rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @include main-color-on-device-media(background-color);
+    @include main-theme-on-device-media('background', $general-background-texture-arches);
   }
 }

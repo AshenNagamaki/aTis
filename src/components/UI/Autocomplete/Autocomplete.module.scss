@@ -21,7 +21,7 @@ $transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-i
 
 @mixin target-option-color-scheme {
   background-color: #e6e6e6;
-  @include main-color-on-device-media(color);
+  @include main-theme-on-device-media('color');
 }
 
 @mixin box-shadow-transparentize($amount) {
@@ -83,7 +83,7 @@ $transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-i
         -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
         opacity: 1;
         filter: none;
-        @include main-color-on-device-media(color);
+        @include main-theme-on-device-media('color');
       }
     }
   }

@@ -2,7 +2,7 @@
 
 @mixin color-change-animation {
   color: $general-background-color;
-  @include main-color-on-device-media(background-color);
+  @include main-theme-on-device-media('background-color');
 }
 
 .Option {

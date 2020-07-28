@@ -29,7 +29,7 @@ $indicator-dimension: 1rem;
     width: $indicator-dimension;
     height: $indicator-dimension;
     border-radius: 50%;
-    @include main-color-on-device-media(background-color);
+    @include main-theme-on-device-media('background-color');
     &.Hidden {
       visibility: hidden;
     }

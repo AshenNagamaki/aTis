@@ -4,6 +4,7 @@ $laptop-and-desktop-main-color: #4b86b4;
 $extra-large-device-main-color: #494d5f;
 $general-background-color: #f7f7f7;
 $general-text-color: #1e1f26;
+$general-background-texture-arches: url('../assets/textures/arches.png') repeat;
 $general-box-shadow: 0 0.28rem 0.22rem rgba(0, 0, 0, 0.034),
   0 0.67rem 0.53rem rgba(0, 0, 0, 0.048), 0 1.25rem 1rem rgba(0, 0, 0, 0.06),
   0 2.23rem 1.79rem rgba(0, 0, 0, 0.072), 0 4.18rem 3.34rem rgba(0, 0, 0, 0.086),
@@ -99,26 +100,26 @@ $viewport-20: 2000px;
   }
 }
 
-@mixin main-color-on-device-media($property) {
+@mixin main-theme-on-device-media($property, $parameter: '') {
   @include for-mobile-portrait {
-    #{$property}: $mobile-main-color;
+    #{$property}: #{$parameter} $mobile-main-color;
   }
   @include for-mobile-landscape {
-    #{$property}: $mobile-main-color;
+    #{$property}: #{$parameter} $mobile-main-color;
   }
   @include for-tablet-portrait {
-    #{$property}: $tablet-main-color;
+    #{$property}: #{$parameter} $tablet-main-color;
   }
   @include for-tablet-landscape {
-    #{$property}: $tablet-main-color;
+    #{$property}: #{$parameter} $tablet-main-color;
   }
   @include for-laptop-and-desktop {
-    #{$property}: $laptop-and-desktop-main-color;
+    #{$property}: #{$parameter} $laptop-and-desktop-main-color;
   }
   @include for-large-laptop-and-desktop {
-    #{$property}: $laptop-and-desktop-main-color;
+    #{$property}: #{$parameter} $laptop-and-desktop-main-color;
   }
   @include for-extra-large-device {
-    #{$property}: $extra-large-device-main-color;
+    #{$property}: #{$parameter} $extra-large-device-main-color;
   }
 }
