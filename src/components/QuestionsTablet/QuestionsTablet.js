@@ -107,6 +107,7 @@ export const QuestionsTablet = connect(
           qNum={index}
           question={question}
           options={options && options[index]}
+          answers={answ}
         />
       ));
 

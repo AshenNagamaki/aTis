@@ -1,5 +1,7 @@
 @import '../../utilities/utilities.scss';
 
+$indicator-dimension: 1rem;
+
 .Question {
   width: 75rem;
   margin: 3.5rem;
@@ -19,6 +21,18 @@
   @include for-tablet-portrait {
     width: 85%;
     margin: 3.5rem 0;
+  }
+  .Indicator {
+    display: inline-block;
+    position: relative;
+    right: 2.5%;
+    width: $indicator-dimension;
+    height: $indicator-dimension;
+    border-radius: 50%;
+    @include main-color-on-device-media(background-color);
+    &.Hidden {
+      visibility: hidden;
+    }
   }
   .QuestionText {
     margin: 0 0 2.5rem 2rem;

@@ -34,9 +34,9 @@
     }
   },
   "lint-staged": {
-    "./src/*.+(js|jsx)": [
-      "eslint src/*.js --fix-dry-run",
-      "yarn prettier --write"
+    "src/**/*.{js,jsx}": [
+      "yarn prettier --write",
+      "eslint --fix src/"
     ]
   },
   "eslintConfig": {
