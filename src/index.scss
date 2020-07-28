@@ -8,8 +8,8 @@ html {
       'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
     font-size: 1.4rem;
-    background-color: $main-color;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    @include main-color-on-device-media(background-color);
   }
 }

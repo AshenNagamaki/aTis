@@ -1,4 +1,7 @@
-$main-color: #4b86b4;
+$mobile-main-color: #9e363a;
+$tablet-main-color: #09868b;
+$laptop-and-desktop-main-color: #4b86b4;
+$extra-large-device-main-color: #494d5f;
 $general-background-color: #f7f7f7;
 $general-text-color: #1e1f26;
 $general-box-shadow: 0 0.28rem 0.22rem rgba(0, 0, 0, 0.034),
@@ -93,5 +96,29 @@ $viewport-20: 2000px;
 @mixin for-extra-large-device {
   @media only screen and (min-width: $viewport-20) {
     @content;
+  }
+}
+
+@mixin main-color-on-device-media($property) {
+  @include for-mobile-portrait {
+    #{$property}: $mobile-main-color;
+  }
+  @include for-mobile-landscape {
+    #{$property}: $mobile-main-color;
+  }
+  @include for-tablet-portrait {
+    #{$property}: $tablet-main-color;
+  }
+  @include for-tablet-landscape {
+    #{$property}: $tablet-main-color;
+  }
+  @include for-laptop-and-desktop {
+    #{$property}: $laptop-and-desktop-main-color;
+  }
+  @include for-large-laptop-and-desktop {
+    #{$property}: $laptop-and-desktop-main-color;
+  }
+  @include for-extra-large-device {
+    #{$property}: $extra-large-device-main-color;
   }
 }

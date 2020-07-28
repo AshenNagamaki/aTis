@@ -1,8 +1,8 @@
 @import '../../../utilities/utilities.scss';
 
 @mixin color-change-animation {
-  background-color: $main-color;
   color: $general-background-color;
+  @include main-color-on-device-media(background-color);
 }
 
 .Option {
