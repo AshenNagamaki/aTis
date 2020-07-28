@@ -38,6 +38,16 @@ export const Main = memo(
           options={opts}
           isActive={!isLoading}
         />
+        <footer className={classes.Footer}>
+          {`v${process.env.REACT_APP_VERSION}`}
+          <a
+            href={process.env.REACT_APP_AUTHOR_URL}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Change my mind
+          </a>
+        </footer>
       </main>
     );
   })

@@ -1,7 +1,22 @@
 {
   "name": "atis",
-  "version": "0.5.0",
-  "homepage": "http://AshenNagamaki.github.io/aTis",
+  "version": "0.6.0",
+  "homepage": "http://ashennagamaki.github.io/aTis",
+  "bugs": {
+    "url": "https://github.com/AshenNagamaki/aTis/issues",
+    "email": "ashennagamaki@protonmail.com"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Maksym Hubenko",
+    "email": "ashennagamaki@protonmail.com",
+    "url": "https://github.com/AshenNagamaki"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AshenNagamaki/aTis.git"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
