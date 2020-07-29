@@ -57,13 +57,8 @@ $margin-mobile: $margin-top-default * 0.4 0 5rem;
       margin-left: 1rem;
       text-decoration: none;
       color: $general-background-color;
-      -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=85)';
-      opacity: 0.85;
-      filter: none;
       &:hover {
-        -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
-        opacity: 1;
-        filter: none;
+        border-bottom: 0.1rem solid $general-background-color;
         cursor: pointer;
       }
     }

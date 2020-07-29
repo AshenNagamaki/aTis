@@ -69,10 +69,10 @@ $transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-i
   font-family: sans-serif;
   -webkit-transition: $transition-default;
   transition: $transition-default;
-  @include background-color-transparentize(0.66);
+  @include background-color-transparentize(0.85);
   @include width-scale-media;
   &:hover {
-    @include background-shadow-transparentize(0.5, 0.05);
+    @include background-shadow-transparentize(0.75, 0.05);
   }
   &.active {
     @include background-shadow-transparentize(0, 0.2);
