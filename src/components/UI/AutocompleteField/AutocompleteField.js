@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -7,18 +7,13 @@ import { ControlButton } from '../ControlButton/ControlButton';
 import { requestCreator } from '../../../store/actionCreators';
 import { handleKeyDownCreator } from '../../../utilities/utilities';
 
-import classes from './Autocomplete.module.scss';
+import classes from './AutocompleteField.module.scss';
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onGetTestCreator: (topic) => dispatch(requestCreator('GET_TEST', topic)),
-  };
-};
+export const AutocompleteField = ({ label, options, isActive }) => {
+  const dispatch = useDispatch();
 
-export const Autocomplete = connect(
-  null,
-  mapDispatchToProps
-)(({ label, options, isActive, onGetTestCreator }) => {
+  const history = useHistory();
+
   const [completion, setCompletion] = useState({
     activeOption: 0,
     filteredOptions: [],
@@ -29,8 +24,6 @@ export const Autocomplete = connect(
   const { activeOption, filteredOptions, showOptions, userInput } = completion;
 
   const [active, setActive] = useState(!isActive);
-
-  const history = useHistory();
 
   const changeHandler = (e) => {
     const currentUserInput = e.currentTarget.value;
@@ -57,7 +50,7 @@ export const Autocomplete = connect(
   };
 
   const getTestOnClickHandler = () => {
-    onGetTestCreator(completion.userInput);
+    dispatch(requestCreator('GET_TEST', userInput));
     history.push('/aTis/test');
   };
 
@@ -136,7 +129,7 @@ export const Autocomplete = connect(
     <>
       <div className={classNameInUse}>
         <input
-          id="autocomplete"
+          id="autocomplete-field"
           type="text"
           name="Autocomplete input field"
           value={userInput}
@@ -148,20 +141,20 @@ export const Autocomplete = connect(
           disabled={!isActive}
           autoComplete="off"
         />
-        <label htmlFor="autocomplete">{isActive && label}</label>
+        <label htmlFor="autocomplete-field">{isActive && label}</label>
         {isActive && userInput && options.includes(userInput) && continueButton}
       </div>
       {optionList}
     </>
   );
-});
+};
 
-Autocomplete.defaultProps = {
+AutocompleteField.defaultProps = {
   label: 'I am a default label! My owner is too lazy to change me.',
   isActive: true,
 };
 
-Autocomplete.propTypes = {
+AutocompleteField.propTypes = {
   label: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   isActive: PropTypes.bool,

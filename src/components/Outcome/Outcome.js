@@ -1,29 +1,24 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React, { memo } from 'react';
+import { Redirect } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
+import { useShallowEqualSelector } from '../../store/hooks';
 import { Button } from '../UI/Button/Button';
-import { activeClassElector } from '../../utilities/utilities';
+import { activeClassElector, objectKeysLength } from '../../utilities/utilities';
 
 import classes from './Outcome.module.scss';
 import outcomeImage from '../../assets/images/outcomeImage.png';
 
-const mapStateToProps = (state) => {
-  return {
-    reqResp: state.reqResponse,
-  };
-};
-
-export const Outcome = connect(mapStateToProps)(({ reqResp }) => {
-  const history = useHistory();
+// eslint-disable-next-line react/prop-types
+export const Outcome = memo(({ history }) => {
+  const reqResp = useShallowEqualSelector((state) => state.reqResponse);
 
   const isSuccess = reqResp && !reqResp.reqFailed;
 
   const activeClass = activeClassElector(isSuccess, classes.image, classes.onFailure);
 
-  return (
+  const outcome = (
     <div className={classes.outcome}>
       <LazyLoadImage
         className={activeClass}
@@ -47,10 +42,17 @@ export const Outcome = connect(mapStateToProps)(({ reqResp }) => {
       <Button
         bName="Return button"
         bValue="Return to the initial window"
+        // eslint-disable-next-line react/prop-types
         clickHandler={() => history.push('/aTis')}
       >
         Take me back
       </Button>
     </div>
+  );
+
+  return objectKeysLength(reqResp) > 1 ? (
+    outcome
+  ) : (
+    <Redirect exact strict sensitive from="/aTis/outcome" to="/aTis" />
   );
 });

@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { addAnswerCreator } from '../../../store/actionCreators';
@@ -7,52 +7,43 @@ import { handleKeyDownCreator, activeClassElector } from '../../../utilities/uti
 
 import classes from './Option.module.scss';
 
-const mapStateToProps = (state) => {
-  return {
-    answersState: state.answers,
-    isLoading: state.isLoading,
-  };
-};
+export const Option = memo(({ qNum, oNum, option }) => {
+  const dispatch = useDispatch();
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onAddAnswer: (qNum, oNum) => dispatch(addAnswerCreator(qNum, oNum)),
-  };
-};
+  const answer = useSelector((state) => state.answers[qNum]);
 
-export const Option = memo(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(({ qNum, oNum, option, answersState, isLoading, onAddAnswer }) => {
-    const literalOpt = String.fromCharCode(65 + oNum);
+  const isLoading = useSelector((state) => state.isLoading);
 
-    const activeClasses = activeClassElector(
-      answersState[qNum] !== literalOpt,
-      classes.option,
-      classes.active
-    );
+  const literalOpt = String.fromCharCode(65 + oNum);
 
-    return (
-      <li
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-        role="button"
-        className={activeClasses}
-        onClick={() => {
-          // eslint-disable-next-line no-unused-expressions
-          !isLoading && onAddAnswer(qNum, literalOpt);
-        }}
-        onKeyDown={
-          (event) => handleKeyDownCreator(event, onAddAnswer(qNum, literalOpt))
-          // eslint-disable-next-line react/jsx-curly-newline
-        }
-      >
-        {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-        {literalOpt} {option}
-      </li>
-    );
-  })
-);
+  const onAddAnswer = (qNumParam, oNumParam) =>
+    dispatch(addAnswerCreator(qNumParam, oNumParam));
+
+  const activeClasses = activeClassElector(
+    answer !== literalOpt,
+    classes.option,
+    classes.active
+  );
+
+  return (
+    <li
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+      role="button"
+      className={activeClasses}
+      onClick={() => {
+        // eslint-disable-next-line no-unused-expressions
+        !isLoading && onAddAnswer(qNum, literalOpt);
+      }}
+      onKeyDown={
+        (event) => handleKeyDownCreator(event, onAddAnswer(qNum, literalOpt))
+        // eslint-disable-next-line react/jsx-curly-newline
+      }
+    >
+      {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+      {literalOpt} {option}
+    </li>
+  );
+});
 
 Option.propTypes = {
   qNum: PropTypes.number.isRequired,
