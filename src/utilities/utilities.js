@@ -15,3 +15,6 @@ export const parseError = (err) =>
   JSON.parse(JSON.stringify(err, Object.getOwnPropertyNames(err)));
 
 export const objectKeysLength = (obj) => Object.keys(obj).length;
+
+export const getArrayTrueLength = (arr) =>
+  JSON.parse(JSON.stringify(arr)).filter((el) => el).length;

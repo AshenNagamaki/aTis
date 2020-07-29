@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback, memo } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Redirect } from 'react-router-dom';
@@ -9,7 +9,11 @@ import { Question } from '../Question/Question';
 import { Button } from '../UI/Button/Button';
 import { ControlButton } from '../UI/ControlButton/ControlButton';
 import { clearStateCreator, requestCreator } from '../../store/actionCreators';
-import { scrollToTop, objectKeysLength } from '../../utilities/utilities';
+import {
+  scrollToTop,
+  objectKeysLength,
+  getArrayTrueLength,
+} from '../../utilities/utilities';
 
 import classes from './QuestionsTablet.module.scss';
 
@@ -64,13 +68,8 @@ export const QuestionsTablet = memo(({ history }) => {
     }
   }, [reqRespLength, history]);
 
-  const isOnSubmit = useMemo(
-    () =>
-      questions &&
-      questions.length !== 0 &&
-      JSON.parse(JSON.stringify(answ)).filter((el) => el).length === questions.length,
-    [questions, answ]
-  );
+  const isOnSubmit =
+    questions && questions.length !== 0 && getArrayTrueLength(answ) === questions.length;
 
   const returnButton = (
     <ControlButton
@@ -112,7 +111,7 @@ export const QuestionsTablet = memo(({ history }) => {
       <Button
         bName="Answers submit button"
         bValue="Submit answers"
-        isDisabled={!isOnSubmit || isLoading}
+        isDisabled={!isOnSubmit}
         clickHandler={submitAnswersClickHandler}
       >
         {isOnSubmit ? 'Submit answers' : 'Please answer all the questions to proceed'}

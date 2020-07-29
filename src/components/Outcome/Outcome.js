@@ -14,7 +14,7 @@ import outcomeImage from '../../assets/images/outcomeImage.png';
 export const Outcome = memo(({ history }) => {
   const reqResp = useShallowEqualSelector((state) => state.reqResponse);
 
-  const isSuccess = reqResp && !reqResp.reqFailed;
+  const isSuccess = !reqResp.reqFailed;
 
   const activeClass = activeClassElector(isSuccess, classes.image, classes.onFailure);
 

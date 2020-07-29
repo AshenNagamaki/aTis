@@ -81,14 +81,14 @@ export const AutocompleteField = ({ label, options, isActive }) => {
 
   let optionList;
 
-  if (userInput && showOptions) {
+  if (userInput.length !== 0 && showOptions) {
     if (filteredOptions.length !== 0) {
       optionList = (
         <ul className={classes.options}>
           {filteredOptions.map((option, index) => (
             <li
               role="menuitem"
-              className={index === activeOption ? classes.optionActive : undefined}
+              className={index === activeOption ? classes.optionActive : ''}
               key={option}
               onClick={clickHandler}
               onKeyDown={
@@ -120,8 +120,8 @@ export const AutocompleteField = ({ label, options, isActive }) => {
   const classNameInUse = useMemo(
     () =>
       `${classes.inputField} ${
-        (!isActive ? active : active || userInput) && classes.active
-      } ${!isActive && !active && classes.inactive}`,
+        ((!isActive ? active : active || userInput.length !== 0) && classes.active) || ''
+      } ${(!isActive && !active && classes.inactive) || ''}`,
     [isActive, userInput, active]
   );
 
@@ -133,7 +133,7 @@ export const AutocompleteField = ({ label, options, isActive }) => {
           type="text"
           name="Autocomplete input field"
           value={userInput}
-          placeholder={isActive ? label : null}
+          placeholder={isActive ? label : ''}
           onChange={changeHandler}
           onKeyDown={keyDownHandler}
           onFocus={() => isActive && setActive(true)}
