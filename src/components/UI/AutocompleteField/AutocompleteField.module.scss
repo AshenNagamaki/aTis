@@ -1,6 +1,6 @@
 @import '../../../utilities/utilities.scss';
 
-$width-default: 27.5%;
+$width-default: 55rem;
 $height-default: 5.65rem;
 $arrow-padding: 1.5rem;
 $border-radius-default: 0.3rem;
@@ -33,28 +33,14 @@ $transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-i
   @include box-shadow-transparentize($amountForShadow);
 }
 
-@mixin width-scale-media {
+@mixin width-media {
+  width: $width-default;
   @include for-mobile-portrait {
-    width: $width-default * 2.9;
+    width: 79.75%;
     font-size: 100%;
   }
   @include for-mobile-landscape {
-    width: $width-default * 2.75;
-  }
-  @include for-tablet-portrait {
-    width: $width-default * 2.15;
-  }
-  @include for-tablet-landscape {
-    width: $width-default * 1.75;
-  }
-  @include for-laptop-and-desktop {
-    width: $width-default * 1.35;
-  }
-  @include for-large-laptop-and-desktop {
-    width: $width-default;
-  }
-  @include for-extra-large-device {
-    width: $width-default * 0.9;
+    width: 75.5%;
   }
 }
 
@@ -64,13 +50,13 @@ $transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-i
 
 .inputField {
   position: relative;
+  @include width-media;
   height: $height-default;
   border-radius: $border-radius-default;
   font-family: sans-serif;
   -webkit-transition: $transition-default;
   transition: $transition-default;
   @include background-color-transparentize(0.85);
-  @include width-scale-media;
   &:hover {
     @include background-shadow-transparentize(0.75, 0.05);
   }
@@ -95,7 +81,7 @@ $transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-i
   }
   input {
     position: relative;
-    width: 100%;
+    width: 92.5%;
     height: $height-default;
     padding: 0 1.5rem;
     border: none;
@@ -147,13 +133,13 @@ $transition-default: 0.33s background-color ease-in-out, 0.33s box-shadow ease-i
 }
 
 ul.options {
+  @include width-media;
   margin: 0;
   padding: 0;
   box-shadow: $general-box-shadow;
   list-style-type: none;
   -webkit-transition: width 0.33s;
   transition: width 0.33s;
-  @include width-scale-media;
   li {
     padding: 1.85rem;
     background-color: $general-background-color;
@@ -176,6 +162,7 @@ ul.options {
 }
 
 .noShow {
+  @include width-media;
   margin: 1rem;
   padding: 0;
   font-size: 105%;
@@ -183,5 +170,4 @@ ul.options {
   -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=75)';
   opacity: 0.75;
   filter: none;
-  @include width-scale-media;
 }
