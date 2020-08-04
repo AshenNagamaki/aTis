@@ -9,11 +9,7 @@ import { Question } from '../Question/Question';
 import { Button } from '../UI/Button/Button';
 import { ControlButton } from '../UI/ControlButton/ControlButton';
 import { clearStateCreator, requestCreator } from '../../store/actionCreators';
-import {
-  scrollToTop,
-  objectKeysLength,
-  getArrayTrueLength,
-} from '../../utilities/utilities';
+import { scrollToTop, objectKeysLength } from '../../utilities/utilities';
 
 import classes from './QuestionsTablet.module.scss';
 
@@ -49,17 +45,20 @@ export const QuestionsTablet = memo(({ history }) => {
     [topic, answ, dispatch]
   );
 
-  const toggleScrollVisibility = () => {
-    // eslint-disable-next-line no-unused-expressions
-    window.pageYOffset > 325 ? setIsScrollVisible(true) : setIsScrollVisible(false);
-  };
+  const toggleScrollVisibility = useCallback(() => {
+    if (!isScrollVisible && window.pageYOffset > 325) {
+      setIsScrollVisible(true);
+    } else if (isScrollVisible && window.pageYOffset <= 325) {
+      setIsScrollVisible(false);
+    }
+  }, [isScrollVisible]);
 
   useEffect(() => {
     document.addEventListener('scroll', toggleScrollVisibility);
     return () => {
       window.removeEventListener('scroll', toggleScrollVisibility);
     };
-  }, []);
+  }, [toggleScrollVisibility]);
 
   useEffect(() => {
     if (reqRespLength > 1) {
@@ -69,7 +68,7 @@ export const QuestionsTablet = memo(({ history }) => {
   }, [reqRespLength, history]);
 
   const isOnSubmit =
-    questions && questions.length !== 0 && getArrayTrueLength(answ) === questions.length;
+    questions && questions.length !== 0 && answ.length === questions.length;
 
   const returnButton = (
     <ControlButton
